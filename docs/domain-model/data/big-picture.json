@@ -28,6 +28,11 @@
     {
       "id": "quality",
       "name": "React品質基盤"
+    },
+    {
+      "id": "voice",
+      "name": "声の指示の振り分け",
+      "note": "一つのセッションが声と各ワーカーの知らせを一件ずつさばき、依頼を登録リポジトリのワーカーへ送る。"
     }
   ],
   "nodes": [
@@ -1412,7 +1417,6 @@
         "pos": "above"
       },
       "note": "製品ごとの構造・コマンド・公開先・秘密情報は、このリポジトリではなく各プロジェクトの AGENTS.md / CLAUDE.md や非公開の <product>-tips スキルにある。計画・実装・公開はそれを読む。",
-      "changed": true,
       "evidence": [
         {
           "path": "README.md",
@@ -1420,6 +1424,335 @@
           "role": "source"
         }
       ]
+    },
+    {
+      "id": "vr-say-actor",
+      "type": "actor",
+      "domain": "voice",
+      "text": "指示する人",
+      "evidence": [
+        {
+          "path": "skills/voice-router/SKILL.md",
+          "symbol": "spoken request",
+          "role": "source"
+        }
+      ],
+      "changed": true
+    },
+    {
+      "id": "vr-route",
+      "type": "command",
+      "domain": "voice",
+      "text": "声の指示を振り分ける",
+      "evidence": [
+        {
+          "path": "skills/voice-router/SKILL.md",
+          "symbol": "transcript segments",
+          "role": "source"
+        }
+      ],
+      "changed": true
+    },
+    {
+      "id": "vr-routed",
+      "type": "event",
+      "domain": "voice",
+      "text": "送り先を決めた",
+      "evidence": [
+        {
+          "path": "skills/voice-router/SKILL.md",
+          "symbol": "Choosing the repository",
+          "role": "source"
+        }
+      ],
+      "changed": true,
+      "phase": "prepare"
+    },
+    {
+      "id": "vr-dispatch",
+      "type": "command",
+      "domain": "voice",
+      "text": "ワーカーを立てて依頼を送る",
+      "evidence": [
+        {
+          "path": "skills/voice-router/SKILL.md",
+          "symbol": "worker-start",
+          "role": "source"
+        }
+      ],
+      "changed": true
+    },
+    {
+      "id": "vr-dispatched",
+      "type": "event",
+      "domain": "voice",
+      "text": "依頼をワーカーへ送った",
+      "evidence": [
+        {
+          "path": "skills/voice-router/SKILL.md",
+          "symbol": "worker-start",
+          "role": "source"
+        }
+      ],
+      "changed": true,
+      "phase": "prepare"
+    },
+    {
+      "id": "vr-followup",
+      "type": "command",
+      "domain": "voice",
+      "text": "続きの話をワーカーへ送る",
+      "evidence": [
+        {
+          "path": "skills/voice-router/SKILL.md",
+          "symbol": "orchestration send",
+          "role": "source"
+        }
+      ],
+      "changed": true
+    },
+    {
+      "id": "vr-followed",
+      "type": "event",
+      "domain": "voice",
+      "text": "続きの話を送った",
+      "evidence": [
+        {
+          "path": "skills/voice-router/SKILL.md",
+          "symbol": "send --to dispatch",
+          "role": "source"
+        }
+      ],
+      "changed": true,
+      "phase": "prepare"
+    },
+    {
+      "id": "vr-ask-actor",
+      "type": "actor",
+      "domain": "voice",
+      "text": "リポジトリのワーカー",
+      "evidence": [
+        {
+          "path": "skills/voice-router/SKILL.md",
+          "symbol": "Starting a worker",
+          "role": "source"
+        }
+      ],
+      "changed": true
+    },
+    {
+      "id": "vr-ask",
+      "type": "command",
+      "domain": "voice",
+      "text": "コーディネーターに質問する",
+      "evidence": [
+        {
+          "path": "skills/voice-router/references/worker-spec.md",
+          "symbol": "orchestration ask",
+          "role": "source"
+        }
+      ],
+      "changed": true
+    },
+    {
+      "id": "vr-ask-in",
+      "type": "event",
+      "domain": "voice",
+      "text": "ワーカーの質問が届いた",
+      "evidence": [
+        {
+          "path": "skills/voice-router/SKILL.md",
+          "symbol": "question",
+          "role": "source"
+        }
+      ],
+      "changed": true,
+      "phase": "prepare"
+    },
+    {
+      "id": "vr-relay",
+      "type": "command",
+      "domain": "voice",
+      "text": "質問を読み上げるか Inbox に回す",
+      "evidence": [
+        {
+          "path": "skills/voice-router/SKILL.md",
+          "symbol": "speak",
+          "role": "source"
+        }
+      ],
+      "changed": true
+    },
+    {
+      "id": "vr-asked",
+      "type": "event",
+      "domain": "voice",
+      "text": "質問を伝えた",
+      "evidence": [
+        {
+          "path": "skills/voice-router/SKILL.md",
+          "symbol": "speak",
+          "role": "source"
+        }
+      ],
+      "changed": true,
+      "phase": "prepare"
+    },
+    {
+      "id": "vr-answer",
+      "type": "command",
+      "domain": "voice",
+      "text": "声の答えをワーカーへ返す",
+      "evidence": [
+        {
+          "path": "skills/voice-router/SKILL.md",
+          "symbol": "orchestration reply",
+          "role": "source"
+        }
+      ],
+      "changed": true
+    },
+    {
+      "id": "vr-answered",
+      "type": "event",
+      "domain": "voice",
+      "text": "答えを返した",
+      "evidence": [
+        {
+          "path": "skills/voice-router/SKILL.md",
+          "symbol": "reply --id",
+          "role": "source"
+        }
+      ],
+      "changed": true,
+      "phase": "prepare"
+    },
+    {
+      "id": "vr-report",
+      "type": "command",
+      "domain": "voice",
+      "text": "完了を報告する",
+      "evidence": [
+        {
+          "path": "skills/voice-router/SKILL.md",
+          "symbol": "worker_done",
+          "role": "source"
+        }
+      ],
+      "changed": true
+    },
+    {
+      "id": "vr-done",
+      "type": "event",
+      "domain": "voice",
+      "text": "ワーカーの完了を読み上げた",
+      "evidence": [
+        {
+          "path": "skills/voice-router/SKILL.md",
+          "symbol": "worker_done",
+          "role": "source"
+        }
+      ],
+      "changed": true,
+      "phase": "prepare"
+    },
+    {
+      "id": "vr-view",
+      "type": "readModel",
+      "domain": "voice",
+      "text": "依頼の一覧（依頼・リポジトリ・ワーカー・状態）",
+      "evidence": [
+        {
+          "path": "skills/voice-router/SKILL.md",
+          "symbol": "routes.json",
+          "role": "source"
+        }
+      ],
+      "changed": true
+    },
+    {
+      "id": "vr-route-rule",
+      "type": "aggregate",
+      "domain": "voice",
+      "text": "依頼の一覧",
+      "evidence": [
+        {
+          "path": "skills/voice-router/SKILL.md",
+          "symbol": "routes.json",
+          "role": "source"
+        }
+      ],
+      "changed": true,
+      "invariants": [
+        "一つの依頼に一つのリポジトリと一つのワーカー",
+        "ワーカーのいる依頼だけが続きの話を受ける"
+      ]
+    },
+    {
+      "id": "vr-policy-confirm",
+      "type": "policy",
+      "execution": "sync",
+      "domain": "voice",
+      "text": "送り先に迷わなければすぐ送り、送り先を読み上げる。迷えば候補を挙げて聞く",
+      "evidence": [
+        {
+          "path": "skills/voice-router/SKILL.md",
+          "symbol": "Always speak the destination",
+          "role": "source"
+        }
+      ],
+      "changed": true
+    },
+    {
+      "id": "vr-policy-inbox",
+      "type": "policy",
+      "execution": "sync",
+      "domain": "voice",
+      "text": "画像や計画書が要る質問は Inbox に回し、そのことだけ読み上げる",
+      "evidence": [
+        {
+          "path": "skills/voice-router/SKILL.md",
+          "symbol": "Inbox",
+          "role": "source"
+        }
+      ],
+      "changed": true
+    },
+    {
+      "id": "vr-loop-hot",
+      "type": "hotspot",
+      "domain": "voice",
+      "text": "一回の番が長いと声と知らせが溜まる。計画・実装はこのセッションでは行わない",
+      "attach": {
+        "to": "vr-route",
+        "pos": "below"
+      },
+      "evidence": [
+        {
+          "path": "skills/voice-router/SKILL.md",
+          "symbol": "never plans, implements or reviews in this session",
+          "role": "source"
+        }
+      ],
+      "changed": true
+    },
+    {
+      "id": "vr-wake-hot",
+      "type": "hotspot",
+      "domain": "voice",
+      "text": "Orca の知らせと声の区切りが同じセッションに交互に届くことを最初の実地確認で確かめる",
+      "attach": {
+        "to": "vr-ask",
+        "pos": "below"
+      },
+      "evidence": [
+        {
+          "path": "skills/voice-router/SKILL.md",
+          "symbol": "Orca wakes this session",
+          "role": "source"
+        }
+      ],
+      "changed": true
     }
   ],
   "edges": [
@@ -1871,6 +2204,141 @@
     {
       "from": "meet-human-done",
       "to": "meet-history",
+      "kind": "result"
+    },
+    {
+      "from": "vr-say-actor",
+      "to": "vr-route",
+      "kind": "flow"
+    },
+    {
+      "from": "vr-route",
+      "to": "vr-route-rule",
+      "kind": "flow"
+    },
+    {
+      "from": "vr-route-rule",
+      "to": "vr-routed",
+      "kind": "flow"
+    },
+    {
+      "from": "vr-routed",
+      "to": "vr-policy-confirm",
+      "kind": "flow"
+    },
+    {
+      "from": "vr-policy-confirm",
+      "to": "vr-dispatch",
+      "kind": "flow"
+    },
+    {
+      "from": "vr-dispatch",
+      "to": "vr-route-rule",
+      "kind": "flow"
+    },
+    {
+      "from": "vr-route-rule",
+      "to": "vr-dispatched",
+      "kind": "flow"
+    },
+    {
+      "from": "vr-say-actor",
+      "to": "vr-followup",
+      "kind": "flow"
+    },
+    {
+      "from": "vr-followup",
+      "to": "vr-route-rule",
+      "kind": "flow"
+    },
+    {
+      "from": "vr-route-rule",
+      "to": "vr-followed",
+      "kind": "flow"
+    },
+    {
+      "from": "vr-ask-actor",
+      "to": "vr-ask",
+      "kind": "flow"
+    },
+    {
+      "from": "vr-ask",
+      "to": "vr-route-rule",
+      "kind": "flow"
+    },
+    {
+      "from": "vr-route-rule",
+      "to": "vr-ask-in",
+      "kind": "flow"
+    },
+    {
+      "from": "vr-ask-in",
+      "to": "vr-policy-inbox",
+      "kind": "flow"
+    },
+    {
+      "from": "vr-policy-inbox",
+      "to": "vr-relay",
+      "kind": "flow"
+    },
+    {
+      "from": "vr-relay",
+      "to": "vr-route-rule",
+      "kind": "flow"
+    },
+    {
+      "from": "vr-route-rule",
+      "to": "vr-asked",
+      "kind": "flow"
+    },
+    {
+      "from": "vr-say-actor",
+      "to": "vr-answer",
+      "kind": "flow"
+    },
+    {
+      "from": "vr-answer",
+      "to": "vr-route-rule",
+      "kind": "flow"
+    },
+    {
+      "from": "vr-route-rule",
+      "to": "vr-answered",
+      "kind": "flow"
+    },
+    {
+      "from": "vr-ask-actor",
+      "to": "vr-report",
+      "kind": "flow"
+    },
+    {
+      "from": "vr-report",
+      "to": "vr-route-rule",
+      "kind": "flow"
+    },
+    {
+      "from": "vr-route-rule",
+      "to": "vr-done",
+      "kind": "flow"
+    },
+    {
+      "from": "vr-view",
+      "to": "vr-say-actor",
+      "kind": "flow"
+    },
+    {
+      "from": "vr-dispatched",
+      "to": "vr-view",
+      "kind": "result"
+    },
+    {
+      "from": "vr-done",
+      "to": "vr-view",
+      "kind": "result"
+    },
+    {
+      "from": "vr-answered",
+      "to": "vr-view",
       "kind": "result"
     }
   ],

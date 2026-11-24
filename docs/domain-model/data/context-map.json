@@ -148,7 +148,6 @@
         "スキルは手順の中で各プロジェクトの tips を読む",
         "実装の根拠は対象製品で再確認する"
       ],
-      "changed": true,
       "evidence": [
         {
           "path": "README.md",
@@ -156,6 +155,30 @@
           "role": "source"
         }
       ]
+    },
+    {
+      "id": "voice",
+      "name": "声の指示の振り分け",
+      "tech": "meeting-voice-mcp・speak-mcp・Orca orchestration",
+      "responsibility": "声の依頼を登録リポジトリのワーカーへ送り、質問と完了を声で中継する",
+      "owns": [
+        "依頼の一覧"
+      ],
+      "contract": [
+        "worker-start / send / reply",
+        "ワーカーは各リポジトリで planning-nowly の流れを回す"
+      ],
+      "domains": [
+        "voice"
+      ],
+      "evidence": [
+        {
+          "path": "skills/voice-router/SKILL.md",
+          "symbol": "worker-start",
+          "role": "source"
+        }
+      ],
+      "changed": true
     }
   ],
   "relations": [
@@ -167,8 +190,7 @@
     {
       "from": "delivery",
       "to": "project-side",
-      "label": "対象製品の手順を参照",
-      "changed": true
+      "label": "対象製品の手順を参照"
     },
     {
       "from": "delivery",
@@ -183,19 +205,23 @@
     {
       "from": "release",
       "to": "project-side",
-      "label": "既存の資格情報と運用対象を確認",
-      "changed": true
+      "label": "既存の資格情報と運用対象を確認"
     },
     {
       "from": "project-side",
       "to": "delivery",
-      "label": "エラー通知などから計画を始める",
-      "changed": true
+      "label": "エラー通知などから計画を始める"
     },
     {
       "from": "model",
       "to": "esm",
       "label": "npx で render・check を呼び、会議ではサーバーで見せて直す"
+    },
+    {
+      "from": "voice",
+      "to": "delivery",
+      "label": "各ワーカーが計画・実装・レビューを回す",
+      "changed": true
     }
   ]
 }
