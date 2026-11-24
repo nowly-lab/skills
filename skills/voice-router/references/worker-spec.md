@@ -19,8 +19,8 @@ Questions:
   End your turn and wait; the person's answer still reaches you, usually within minutes.
 - A question that needs pictures, a plan or several decisions: send it to the
   Plannotator Inbox as planning-nowly says, then tell the coordinator with a status message
-  (nothing comes back): orca orchestration send --type status --to <your coordinator, as
-  your preamble names it> --subject "Inbox" --body "Inbox に質問を送りました: <gist>".
+  (nothing comes back): orca orchestration send --type status (no --to: it goes to your
+  coordinator) --subject "Inbox" --body "Inbox に質問を送りました: <gist>".
   Continue work that does not depend on it; the answer comes from the Inbox.
 - Plans go to the Plannotator Inbox, not through the coordinator.
 - If the coordinator tells you it has closed, send every further question to the
