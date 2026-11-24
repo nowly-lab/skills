@@ -1,5 +1,7 @@
 import re
 import unittest
+
+import yaml
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -16,13 +18,9 @@ class VoiceRouterSkillTest(unittest.TestCase):
         text = read(SKILL)
         match = re.match(r'---\n(.*?)\n---\n', text, re.S)
         self.assertIsNotNone(match, 'SKILL.md must start with a --- frontmatter block')
-        lines = dict(line.split(': ', 1) for line in match.group(1).splitlines() if ': ' in line)
-        self.assertEqual(lines.get('name'), 'voice-router')
-        description = lines.get('description', '')
-        self.assertTrue(description, 'description is required')
-        if ': ' in description:
-            self.assertTrue(description.startswith('"') and description.endswith('"'),
-                            'a description with a colon must be quoted')
+        meta = yaml.safe_load(match.group(1))
+        self.assertEqual(meta.get('name'), 'voice-router')
+        self.assertTrue(meta.get('description'))
 
     def test_event_loop_rules(self):
         text = read(SKILL)
@@ -32,15 +30,32 @@ class VoiceRouterSkillTest(unittest.TestCase):
     def test_orca_commands(self):
         text = read(SKILL)
         for command in ('worker-start --environment local', '--worktree new-top-level',
-                        'send --to dispatch:', 'reply --id', 'orca repo list --json'):
+                        'send --to dispatch:', 'reply --id', 'orca repo list --json',
+                        '--task-title', 'orca project setups'):
             with self.subTest(command=command):
                 self.assertIn(command, text)
 
     def test_worker_spec_template(self):
         text = read(SPEC)
-        for word in ('planning-nowly', 'orchestration ask', 'Plannotator Inbox', 'worker_done'):
+        for word in ('planning-nowly', 'orchestration ask', 'Plannotator Inbox', 'worker_done',
+                     '--type status', 'set up on this machine'):
             with self.subTest(word=word):
                 self.assertIn(word, text)
+
+    def test_inbox_notice_is_status_not_question(self):
+        self.assertNotIn('orchestration ask with one line', read(SPEC))
+        self.assertIn('| A worker `status`', read(SKILL))
+
+    def test_close_hands_questions_to_inbox(self):
+        close = read(SKILL).split('## Close', 1)[1].split('## ', 1)[0]
+        self.assertIn('send further questions to the Plannotator Inbox', close)
+
+    def test_no_product_names(self):
+        self.assertNotIn('ebay', read(SKILL).lower())
+        self.assertNotIn('the user named it', read(SPEC))
+
+    def test_meeting_hub_handles_worker_mail(self):
+        self.assertIn('worker mail', read(ROOT / 'skills/meeting-hub/SKILL.md'))
 
     def test_linked_from_meeting_hub_and_readme(self):
         self.assertIn('voice-router', read(ROOT / 'skills/meeting-hub/SKILL.md'))
