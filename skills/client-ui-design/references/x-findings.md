@@ -610,3 +610,35 @@ enoyann: 1921707391152009489, 1922598261485174853 / Frontend_Prince: 20857067336
 - FVに全部詰め込まず、誰のためのサービスかから考える（[@aiteamos_jp](https://x.com/aiteamos_jp/status/2124087930390237268)）→ 既存の「主役を1つ」
 
 - 不採用：AIっぽさ除去スキル・リソース紹介（@WakeAlen、@Dionisselamii、@Alok619308、宣伝・まとめ）、CRO代理店の営業投稿（@alex_momeni、@saadimarketing など）、ゲーム「ペルソナ」・イベントの入力フォームなど無関係な投稿
+
+## 2026-11-23 追加（定期見直し。2026-11-22 09:00〜11-23 09:00 JSTの投稿）
+
+**AIっぽさ（偽の証拠）**
+- AI製LPの緑に点滅する「All Systems Operational」バッジは、何も監視していないただのCSSアニメのことがある。動くシステムより、その見た目の証拠を作る方がずっと簡単（[@srcbuild](https://x.com/srcbuild/status/2124494700237439133)）
+- わざとAIが急いで作ったように見せるCSSフレームワーク「Slopstrap」の中身が、光るグラデ、不要なバッジ、動く統計の数字、偽の推薦文、角丸カードの入れ子（[@oldstackjournal](https://x.com/oldstackjournal/status/2124624035510378868)）
+- vibe codedの料金ページは一瞬で分かる。偽のステータス行やグラデのスローガンなどのAIの癖に名前をつけて直すスキル（[@fildotai](https://x.com/fildotai/status/2124614396492316944)、自社スキルの宣伝で割り引き）→ 計3件（独立した非宣伝2件）。Step 6の「偽ダッシュボード」行に、つながっていない「稼働中」表示とカウントアップの数字を追加
+- 同じグラデ・同じレイアウト・同じ偽の推薦文で、AI製LPは2秒で分かる（[@samongaro_](https://x.com/samongaro_/status/2124552488745345140)）／紫グラデ・全見出しInter・絵文字つき3カード・「unlock the power of」（[@rohanbhanot](https://x.com/rohanbhanot/status/2124513578359140417)、ツール紹介）→ 既存のAIっぽさ表・社会的証明の行
+
+**AIへの指示**
+- スライドのAIっぽさの原因は「見ずに・形だけ・1枚ずつ作る」こと。禁止ではなく「やめること→代わりに使うもの」の対で指示するのが効く、と人が作った資料395枚と照らして検証した記事の紹介（[@piske_cc](https://x.com/piske_cc/status/2124473171298685098)、検証は記事側の自己申告）→ 11-22の @Kanata_Muse（禁止だけでなく代わりにどう整えるかまで指示）に続く2件目。Step 5の2に追記
+- AI製サイトが悪く見えるのはAIのせいではなく、曖昧な指示、参考なし、書体の軽視、適当な色、最初の出力をそのまま採用するから（[@GondhaleRitesh](https://x.com/GondhaleRitesh/status/2124451253971460225)）→ 既存のStep 5
+- 「AIっぽさ」は余白と線の均一さに出る（[@hitoribizdesign](https://x.com/hitoribizdesign/status/2124352026301940116)）／HTMLで組むと余白や文字サイズが均一になりすぎる（[@bigmacfive](https://x.com/bigmacfive/status/2124318233238843769)）→ 既存の「均等すぎる余白」
+- 画像生成は文字も中心でバランスを取るが、デザインの文字配置は下のラインで揃えるので、その違いがAIっぽさになる（[@nakanodelicacy](https://x.com/nakanodelicacy/status/2124397326492180765)、返信）→ 1件、記録のみ
+
+**アクセシビリティ**
+- AIエージェントのアクセシビリティ対応：画像のaltは全部「image」、ボタン名は全部「button」、コントラストは全部同じグレーにして解決。監査は通るが誰も使えない（[@GenesisProio](https://x.com/GenesisProio/status/2124594970661179757)）→ 既存の「AIが書いたaltは人が読んで直す」「自動スコアだけで合格にしない」
+- デザイントークンは片方のテーマでコントラストを満たしても、もう片方で落ちる。同じ部品を両テーマに置き、通常・フォーカス・無効の状態まで確認（[@DominickNoval](https://x.com/DominickNoval/status/2124580600887840962)）→ 既存のダークモードの行。状態ごとの確認は1件、記録のみ
+- 施工事例の詳細ページで「施工事例」がh1・個別タイトルがh2だと、見出しで移動する人にはどのページも主役が同じ。テンプレート1つで全ページ直る（[@tedekku0323](https://x.com/tedekku0323/status/2124609684820877581)）→ 1件、記録のみ
+- 入力が不正な間に送信ボタンを無効にするのは悪いUX。押しても何も起きず、どの欄が原因か分からない。押せるままにしてエラーを示す（[@Jogoh95](https://x.com/Jogoh95/status/2124492092411896291)）→ 11-20に追加した状態の行と同じ
+
+**LP/CVR・BtoB**
+- LPのCVRが落ちたら文章を直す前に分母を見る。クリック基準とLP到達後のCVRを分けると、落ちたのは到達率だけのことがある（[@haku_ad5](https://x.com/haku_ad5/status/2124442797705240821)）／CPAが急に上がった原因はクリックの後にあることがある（[@nishimura_meta](https://x.com/nishimura_meta/status/2124608869297000612)）→ 既存の計測行
+- ローン関連なら年収や自己資金の目安をLPに書く。申込は減ってもその後の審査通過率が上がる（[@yutayutayutaro5](https://x.com/yutayutayutaro5/status/2124427745300197727)）→ 既存の「おすすめしない人」・CVの質
+- ヒーローの役目は、何をしていて次に何をすればいいかを伝えること。見出し1つ・補足1行・主ボタン1つ。2つ目の行動は目立たない文字リンクに（[@brisapages](https://x.com/brisapages/status/2124538779004195273)）／スマホで開いて見出しとボタンが最初の画面に収まらなければそれが最初の修正（[@710knl](https://x.com/710knl/status/2124518277825335334)）→ 既存の「1画面に主ボタン1つ」・375px確認
+- B2B広告は「x alternative」「x vs y」「x pricing」をフレーズ一致で、キーワードごとにLPを1枚、H1と最初の段落にキーワード（[@Graphed](https://x.com/Graphed/status/2124608921184653620)）→ 既存のメッセージマッチ・BtoBの着地ページ
+- 納品前に見出しを倍の長さに、写真を縦長に、ボタンを「無料30分相談を予約」にしてレイアウトが崩れないか試す（[@omburo_com](https://x.com/omburo_com/status/2124525847382016023)）→ 1件、記録のみ
+
+**ヒアリング**
+- 「どんなサイトに？」→「おしゃれな感じで」→「分かりました」で作り始め、納品後に全やり直し。クライアントの「おしゃれ」と自分の「おしゃれ」は違う（[@kazm_n18](https://x.com/kazm_n18/status/2124634787965255966)）→ 既存のStep 1（参考の「どこが」「なぜ」）
+
+- 不採用：AIっぽさ除去のスキル・道具紹介（@AiAircle34052、@I_am_Aiabir、@zeewasd、@alex_atoms、@aiwaremax、@typedbynikolas、@1DevanshBuilds、宣伝・まとめ）、「フォーム項目1つで約4%減」（@LaurentiuPetran と @sitescore_ai が同文、無料診断の宣伝）、CRO代理店・LP制作の営業投稿（@connectazeem、@alex_momeni、@ecomricsi など）、デザインライブラリMCPの「CVR2倍」（@codex_lab_、宣伝）、ゲーム「ペルソナ」・各種申込フォームの告知など無関係な投稿
