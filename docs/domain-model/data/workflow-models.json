@@ -1,0 +1,495 @@
+{
+  "schema": "workflow-models/v1",
+  "title": "現在のライフサイクル",
+  "checked": {
+    "revision": "dd7ba79",
+    "date": "2026-11-24"
+  },
+  "lifecycles": [
+    {
+      "id": "delivery-life",
+      "name": "計画から公開までの手順",
+      "domain": "delivery",
+      "summary": "コードまたは手順で確認できる遷移だけを記載。未定義の状態×契機はホットスポット「procedural-states」を参照。",
+      "states": [
+        {
+          "id": "draft",
+          "name": "計画準備中",
+          "initial": true
+        },
+        {
+          "id": "ready",
+          "name": "実装準備完了"
+        },
+        {
+          "id": "verified",
+          "name": "実装検証済み"
+        },
+        {
+          "id": "reviewed",
+          "name": "レビュー解決済み"
+        },
+        {
+          "id": "released",
+          "name": "公開確認済み"
+        }
+      ],
+      "transitions": [
+        {
+          "from": "draft",
+          "on": "plan",
+          "to": "ready",
+          "guard": "必要な計画内容と証拠が揃う",
+          "effect": "ready を記録",
+          "evidence": [
+            {
+              "path": "skills/implementation-nowly/SKILL.md",
+              "symbol": "handoff",
+              "role": "source"
+            }
+          ]
+        },
+        {
+          "from": "ready",
+          "on": "implement",
+          "to": "verified",
+          "guard": "全タスクと検証がGREEN",
+          "effect": "レビューへ引継ぎ",
+          "evidence": [
+            {
+              "path": "skills/implementation-nowly/SKILL.md",
+              "symbol": "handoff",
+              "role": "source"
+            }
+          ]
+        },
+        {
+          "from": "verified",
+          "on": "review",
+          "to": "reviewed",
+          "guard": "指摘を解決し判定を記録",
+          "effect": "実装担当へ戻す",
+          "evidence": [
+            {
+              "path": "skills/implementation-nowly/SKILL.md",
+              "symbol": "handoff",
+              "role": "source"
+            }
+          ]
+        },
+        {
+          "from": "reviewed",
+          "on": "release",
+          "to": "released",
+          "guard": "許可・モデル検査・公開面の検証が揃う",
+          "effect": "公開結果を記録",
+          "evidence": [
+            {
+              "path": "skills/implementation-nowly/SKILL.md",
+              "symbol": "handoff",
+              "role": "source"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "model-life",
+      "name": "モデルと描画の整合性",
+      "domain": "model",
+      "summary": "コードまたは手順で確認できる遷移だけを記載。未定義の状態×契機はホットスポット「evidence-limit」を参照。",
+      "states": [
+        {
+          "id": "absent",
+          "name": "未初期化",
+          "initial": true
+        },
+        {
+          "id": "data",
+          "name": "データあり"
+        },
+        {
+          "id": "rendered",
+          "name": "描画済み"
+        },
+        {
+          "id": "checked",
+          "name": "照合済み"
+        }
+      ],
+      "transitions": [
+        {
+          "from": "absent",
+          "on": "model-init",
+          "to": "data",
+          "guard": "不足ファイルがある",
+          "effect": "雛形を作成",
+          "evidence": [
+            {
+              "path": "skills/scrum-domain-modeling/SKILL.md",
+              "symbol": "event-storming-mcp",
+              "role": "source"
+            }
+          ]
+        },
+        {
+          "from": "data",
+          "on": "model-render",
+          "to": "rendered",
+          "guard": "データ検証が成功",
+          "effect": "6ページを書出す",
+          "evidence": [
+            {
+              "path": "skills/scrum-domain-modeling/SKILL.md",
+              "symbol": "event-storming-mcp",
+              "role": "source"
+            }
+          ]
+        },
+        {
+          "from": "rendered",
+          "on": "model-render",
+          "to": "rendered",
+          "guard": "データ検証が成功",
+          "effect": "再描画する",
+          "evidence": [
+            {
+              "path": "skills/scrum-domain-modeling/SKILL.md",
+              "symbol": "event-storming-mcp",
+              "role": "source"
+            }
+          ]
+        },
+        {
+          "from": "rendered",
+          "on": "model-check",
+          "to": "checked",
+          "guard": "HTML一致と根拠検査が成功",
+          "effect": "終了コード0",
+          "evidence": [
+            {
+              "path": "skills/scrum-domain-modeling/SKILL.md",
+              "symbol": "event-storming-mcp",
+              "role": "source"
+            }
+          ]
+        },
+        {
+          "from": "checked",
+          "on": "model-check",
+          "to": "checked",
+          "guard": "同じ条件を満たす",
+          "effect": "終了コード0",
+          "evidence": [
+            {
+              "path": "skills/scrum-domain-modeling/SKILL.md",
+              "symbol": "event-storming-mcp",
+              "role": "source"
+            }
+          ]
+        },
+        {
+          "from": "checked",
+          "on": "model-render",
+          "to": "rendered",
+          "guard": "データ検証が成功",
+          "effect": "再描画する",
+          "evidence": [
+            {
+              "path": "skills/scrum-domain-modeling/SKILL.md",
+              "symbol": "event-storming-mcp",
+              "role": "source"
+            }
+          ]
+        }
+      ],
+      "rejections": [
+        {
+          "state": "data",
+          "on": "model-init",
+          "kind": "ignored",
+          "reason": "4つのデータファイルが全て存在する場合はそのまま残す。部分欠落時は不足ファイルのみ作成する。"
+        },
+        {
+          "state": "rendered",
+          "on": "model-init",
+          "kind": "ignored",
+          "reason": "4つのデータファイルが全て存在する場合はそのまま残す。部分欠落時は不足ファイルのみ作成する。"
+        },
+        {
+          "state": "checked",
+          "on": "model-init",
+          "kind": "ignored",
+          "reason": "4つのデータファイルが全て存在する場合はそのまま残す。部分欠落時は不足ファイルのみ作成する。"
+        }
+      ]
+    },
+    {
+      "id": "quality-life",
+      "name": "品質基盤の導入",
+      "domain": "quality",
+      "summary": "コードまたは手順で確認できる遷移だけを記載。未定義の状態×契機はホットスポット「quality-transaction」を参照。",
+      "states": [
+        {
+          "id": "unplanned",
+          "name": "未計画",
+          "initial": true
+        },
+        {
+          "id": "planned",
+          "name": "計画済み"
+        },
+        {
+          "id": "applied",
+          "name": "適用済み"
+        }
+      ],
+      "transitions": [
+        {
+          "from": "unplanned",
+          "on": "quality-plan",
+          "to": "planned",
+          "guard": "対象調査が成功",
+          "effect": "導入差分を整理",
+          "evidence": [
+            {
+              "path": "skills/react-component-quality/scripts/setup-react-quality.mjs",
+              "symbol": "applyQualitySetup",
+              "role": "source"
+            }
+          ]
+        },
+        {
+          "from": "planned",
+          "on": "quality-plan",
+          "to": "planned",
+          "guard": "再調査が成功",
+          "effect": "計画を再生成",
+          "evidence": [
+            {
+              "path": "skills/react-component-quality/scripts/setup-react-quality.mjs",
+              "symbol": "applyQualitySetup",
+              "role": "source"
+            }
+          ]
+        },
+        {
+          "from": "planned",
+          "on": "quality-apply",
+          "to": "applied",
+          "guard": "計画が新鮮で競合がない",
+          "effect": "管理ファイルを書出す",
+          "evidence": [
+            {
+              "path": "skills/react-component-quality/scripts/setup-react-quality.mjs",
+              "symbol": "applyQualitySetup",
+              "role": "source"
+            }
+          ]
+        },
+        {
+          "from": "applied",
+          "on": "quality-plan",
+          "to": "planned",
+          "guard": "再調査が成功",
+          "effect": "更新差分を整理",
+          "evidence": [
+            {
+              "path": "skills/react-component-quality/scripts/setup-react-quality.mjs",
+              "symbol": "applyQualitySetup",
+              "role": "source"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "version-life",
+      "name": "会議中のモデルの版",
+      "domain": "meeting",
+      "summary": "構造の誤りがある変更は版にならない（断る）。古い版からの書き込みも断り、版は増えない。",
+      "states": [
+        {
+          "id": "clean",
+          "name": "検証済み",
+          "initial": true
+        },
+        {
+          "id": "draft",
+          "name": "書きかけ"
+        }
+      ],
+      "transitions": [
+        {
+          "from": "clean",
+          "on": "meet-agent",
+          "to": "clean",
+          "guard": "検証が全部通る",
+          "effect": "JSONとコミット用HTMLを書く",
+          "evidence": [
+            {
+              "path": "skills/event-storming-mcp-tips/SKILL.md",
+              "symbol": "書きかけ",
+              "role": "source"
+            }
+          ]
+        },
+        {
+          "from": "clean",
+          "on": "meet-agent",
+          "to": "draft",
+          "guard": "構造は正しいが決まりの違反がある",
+          "effect": "JSONだけ書き、図に違反を示す",
+          "evidence": [
+            {
+              "path": "skills/event-storming-mcp-tips/SKILL.md",
+              "symbol": "書きかけ",
+              "role": "source"
+            }
+          ]
+        },
+        {
+          "from": "draft",
+          "on": "meet-agent",
+          "to": "clean",
+          "guard": "検証が全部通る",
+          "effect": "JSONとコミット用HTMLを書く",
+          "evidence": [
+            {
+              "path": "skills/event-storming-mcp-tips/SKILL.md",
+              "symbol": "書きかけ",
+              "role": "source"
+            }
+          ]
+        },
+        {
+          "from": "draft",
+          "on": "meet-agent",
+          "to": "draft",
+          "guard": "構造は正しいが決まりの違反がある",
+          "effect": "JSONだけ書き、図に違反を示す",
+          "evidence": [
+            {
+              "path": "skills/event-storming-mcp-tips/SKILL.md",
+              "symbol": "書きかけ",
+              "role": "source"
+            }
+          ]
+        },
+        {
+          "from": "clean",
+          "on": "meet-human",
+          "to": "clean",
+          "guard": "検証が全部通る",
+          "effect": "JSONとコミット用HTMLを書く",
+          "evidence": [
+            {
+              "path": "skills/event-storming-mcp-tips/SKILL.md",
+              "symbol": "書きかけ",
+              "role": "source"
+            }
+          ]
+        },
+        {
+          "from": "clean",
+          "on": "meet-human",
+          "to": "draft",
+          "guard": "構造は正しいが決まりの違反がある",
+          "effect": "JSONだけ書き、図に違反を示す",
+          "evidence": [
+            {
+              "path": "skills/event-storming-mcp-tips/SKILL.md",
+              "symbol": "書きかけ",
+              "role": "source"
+            }
+          ]
+        },
+        {
+          "from": "draft",
+          "on": "meet-human",
+          "to": "clean",
+          "guard": "検証が全部通る",
+          "effect": "JSONとコミット用HTMLを書く",
+          "evidence": [
+            {
+              "path": "skills/event-storming-mcp-tips/SKILL.md",
+              "symbol": "書きかけ",
+              "role": "source"
+            }
+          ]
+        },
+        {
+          "from": "draft",
+          "on": "meet-human",
+          "to": "draft",
+          "guard": "構造は正しいが決まりの違反がある",
+          "effect": "JSONだけ書き、図に違反を示す",
+          "evidence": [
+            {
+              "path": "skills/event-storming-mcp-tips/SKILL.md",
+              "symbol": "書きかけ",
+              "role": "source"
+            }
+          ]
+        },
+        {
+          "from": "clean",
+          "on": "meet-restore",
+          "to": "clean",
+          "guard": "検証が全部通る",
+          "effect": "JSONとコミット用HTMLを書く",
+          "evidence": [
+            {
+              "path": "skills/event-storming-mcp-tips/SKILL.md",
+              "symbol": "書きかけ",
+              "role": "source"
+            }
+          ]
+        },
+        {
+          "from": "clean",
+          "on": "meet-restore",
+          "to": "draft",
+          "guard": "構造は正しいが決まりの違反がある",
+          "effect": "JSONだけ書き、図に違反を示す",
+          "evidence": [
+            {
+              "path": "skills/event-storming-mcp-tips/SKILL.md",
+              "symbol": "書きかけ",
+              "role": "source"
+            }
+          ]
+        },
+        {
+          "from": "draft",
+          "on": "meet-restore",
+          "to": "clean",
+          "guard": "検証が全部通る",
+          "effect": "JSONとコミット用HTMLを書く",
+          "evidence": [
+            {
+              "path": "skills/event-storming-mcp-tips/SKILL.md",
+              "symbol": "書きかけ",
+              "role": "source"
+            }
+          ]
+        },
+        {
+          "from": "draft",
+          "on": "meet-restore",
+          "to": "draft",
+          "guard": "構造は正しいが決まりの違反がある",
+          "effect": "JSONだけ書き、図に違反を示す",
+          "evidence": [
+            {
+              "path": "skills/event-storming-mcp-tips/SKILL.md",
+              "symbol": "書きかけ",
+              "role": "source"
+            }
+          ]
+        }
+      ],
+      "rejections": []
+    }
+  ]
+}
