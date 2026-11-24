@@ -1,0 +1,14 @@
+import { act, renderHook } from '@testing-library/react'
+import { describe, expect, it } from 'vitest'
+
+import { use__COMPONENT_NAME__ } from '__IMPORT_PATH__'
+
+describe('use__COMPONENT_NAME__', () => {
+  it('owns the open state transition', () => {
+    const { result } = renderHook(() => use__COMPONENT_NAME__())
+
+    act(() => result.current.open())
+
+    expect(result.current.isOpen).toBe(true)
+  })
+})

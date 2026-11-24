@@ -1,0 +1,42 @@
+{
+  "$schema": "../../node_modules/oxlint/configuration_schema.json",
+  "plugins": ["import", "jsx-a11y", "react", "react-hooks", "typescript", "vitest"],
+  "categories": {
+    "correctness": "warn",
+    "suspicious": "warn",
+    "perf": "warn"
+  },
+  "rules": {
+    "import/no-cycle": ["warn", { "maxDepth": 3 }],
+    "import/no-duplicates": "error",
+    "import/no-self-import": "error",
+    "jsx-a11y/alt-text": "warn",
+    "jsx-a11y/aria-props": "warn",
+    "jsx-a11y/aria-role": "warn",
+    "react-hooks/exhaustive-deps": "warn",
+    "react-hooks/rules-of-hooks": "error"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.ts"],
+      "rules": { "max-lines": ["error", { "max": 300, "skipBlankLines": true, "skipComments": true }] }
+    },
+    {
+      "files": ["**/*.tsx"],
+      "rules": { "max-lines": ["error", { "max": 400, "skipBlankLines": true, "skipComments": true }] }
+    },
+    {
+      "files": ["**/*.mjs"],
+      "rules": { "max-lines": ["error", { "max": 600, "skipBlankLines": true, "skipComments": true }] }
+    },
+    {
+      "files": ["**/*.{test,spec}.{ts,tsx}"],
+      "rules": {
+        "max-lines": ["error", { "max": 800, "skipBlankLines": true, "skipComments": true }],
+        "vitest/no-focused-tests": "error",
+        "vitest/no-identical-title": "warn"
+      }
+    }
+  ],
+  "ignorePatterns": ["**/.react-quality", "**/node_modules", "**/dist", "**/out", "**/coverage"]
+}

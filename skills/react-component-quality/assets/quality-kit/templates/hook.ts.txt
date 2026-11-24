@@ -1,0 +1,13 @@
+import { useCallback, useState } from 'react'
+
+type Use__COMPONENT_NAME__Options = {
+  initialOpen?: boolean
+}
+
+export function use__COMPONENT_NAME__({ initialOpen = false }: Use__COMPONENT_NAME__Options = {}) {
+  const [isOpen, setIsOpen] = useState(initialOpen)
+  const close = useCallback(() => setIsOpen(false), [])
+  const open = useCallback(() => setIsOpen(true), [])
+
+  return { close, isOpen, open }
+}

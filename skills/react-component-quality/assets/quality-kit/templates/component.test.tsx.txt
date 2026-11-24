@@ -1,0 +1,12 @@
+import { render, screen } from '@testing-library/react'
+import { describe, expect, it } from 'vitest'
+
+import { __COMPONENT_NAME__ } from '__IMPORT_PATH__'
+
+describe('__COMPONENT_NAME__', () => {
+  it('renders its content in a named region', () => {
+    render(<__COMPONENT_NAME__>Content</__COMPONENT_NAME__>)
+
+    expect(screen.getByRole('region', { name: '__COMPONENT_NAME__' }).textContent).toBe('Content')
+  })
+})

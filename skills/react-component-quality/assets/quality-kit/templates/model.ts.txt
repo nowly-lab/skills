@@ -1,0 +1,8 @@
+export type __COMPONENT_NAME__Model = {
+  id: string
+  label: string
+}
+
+export function create__COMPONENT_NAME__Model(id: string, label: string): __COMPONENT_NAME__Model {
+  return { id, label }
+}

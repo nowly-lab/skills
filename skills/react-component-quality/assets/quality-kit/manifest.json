@@ -1,0 +1,424 @@
+{
+  "sourceRepository": "https://github.com/stablyai/orca",
+  "sourceLicense": "MIT License, Copyright (c) 2026 Lovecast Inc.",
+  "sourceCommit": "b2612de157d58320f2b90fa319d04c4f8bbab2cd",
+  "generatedAt": "2026-11-24T02:54:33.784Z",
+  "entries": [
+    {
+      "source": "AGENTS.md",
+      "bundled": null,
+      "role": "policy",
+      "portability": "inventory",
+      "required": true,
+      "sha256": "e2cc0985115029f2e3370af614ddbd4ca69a11a9e2b1db7dcf67dc336228d480"
+    },
+    {
+      "source": "docs/STYLEGUIDE.md",
+      "bundled": null,
+      "role": "style-guide",
+      "portability": "inventory",
+      "required": true,
+      "sha256": "9ae6f2804adbe1be329ee6bae2737508a10248a6ee5e45a3f2c5142860eb05e2"
+    },
+    {
+      "source": "src/renderer/src/assets/main.css",
+      "bundled": null,
+      "role": "token-source",
+      "portability": "inventory",
+      "required": true,
+      "sha256": "d2fa20fe6d303b22ee92e93fc5705119bf86b5ff9c5d5a5b8363209b1a059b87"
+    },
+    {
+      "source": "src/renderer/src/components/NewWorkspaceComposerCard.tsx",
+      "bundled": null,
+      "role": "representative-react-component",
+      "portability": "inventory",
+      "required": true,
+      "sha256": "dfc957204dc773ef7e033eb3ca482c7ce1a5161c6e63aa176963fe62df5931c1"
+    },
+    {
+      "source": "src/renderer/src/components/NewWorkspaceComposerCard.test.tsx",
+      "bundled": null,
+      "role": "representative-react-test",
+      "portability": "inventory",
+      "required": true,
+      "sha256": "4b8e34e0f515913805c6afd1aba175394b17d975e60d3ed4aa8bedda8598a01e"
+    },
+    {
+      "source": "src/renderer/src/components/AgentWorkingSpinner.tsx",
+      "bundled": null,
+      "role": "representative-react-component",
+      "portability": "inventory",
+      "required": true,
+      "sha256": "9c1aa64eaa0e89e24a1549f1b8651935d25e98aa54ba82d89aed02cb4a4dee07"
+    },
+    {
+      "source": "src/renderer/src/components/AgentWorkingSpinner.test.tsx",
+      "bundled": null,
+      "role": "representative-react-test",
+      "portability": "inventory",
+      "required": true,
+      "sha256": "414ab5f1702413febedf6474e6affd383ff4fdb2620e802816cd42711cef42ab"
+    },
+    {
+      "source": "src/renderer/src/App.tsx",
+      "bundled": null,
+      "role": "representative-app-composition",
+      "portability": "inventory",
+      "required": true,
+      "sha256": "235ddbac85652d6b0800ee3f530dce5a1d96e3e8ea42ec8ccccff46557b63542"
+    },
+    {
+      "source": "src/renderer/src/app-shell/AppBackgroundServices.tsx",
+      "bundled": null,
+      "role": "representative-background-services",
+      "portability": "inventory",
+      "required": true,
+      "sha256": "f4cb495be4bd3393ef6adf7fa98c87d321d75aab0c130231ccc6134127b6a208"
+    },
+    {
+      "source": "src/renderer/src/app-shell/AppWorkspaceShell.tsx",
+      "bundled": null,
+      "role": "representative-workspace-shell",
+      "portability": "inventory",
+      "required": true,
+      "sha256": "2239b3f8060798c05f21573f0eaabee6598ab2455fa6d108538cf2d777c3a5b1"
+    },
+    {
+      "source": "src/renderer/src/app-shell/AppRootSurfaces.tsx",
+      "bundled": null,
+      "role": "representative-lazy-loading",
+      "portability": "inventory",
+      "required": true,
+      "sha256": "9cd2d7022546db44d72d70dcbc98045bb22fffdc65858c682a03d7c7d5db7c32"
+    },
+    {
+      "source": "src/renderer/src/app-shell/use-app-startup-hydration.ts",
+      "bundled": null,
+      "role": "representative-hook",
+      "portability": "inventory",
+      "required": true,
+      "sha256": "d5ce9a08e5c296700a8069e79df3483e25db8ad70fd6a14a7d3f9e68e334920e"
+    },
+    {
+      "source": "src/renderer/src/components/pull-request-page/page/surface.tsx",
+      "bundled": null,
+      "role": "representative-feature",
+      "portability": "inventory",
+      "required": true,
+      "sha256": "69f99403531edbf7b1430cdc7d54552d0ad04e1a7240dad574626e7e26ea50ba"
+    },
+    {
+      "source": "src/renderer/src/components/pull-request-page-host-boundary.test.ts",
+      "bundled": null,
+      "role": "representative-feature-boundary-test",
+      "portability": "inventory",
+      "required": true,
+      "sha256": "d3461b2d2c567643270ee5a77788981f3ab3c09a21ff114efc8d3818190e1831"
+    },
+    {
+      "source": "src/renderer/src/components/github-item-dialog-source-boundary.test.ts",
+      "bundled": null,
+      "role": "representative-feature-boundary-test",
+      "portability": "inventory",
+      "required": true,
+      "sha256": "be8e691703ac9cfe9a73011b71415120c32d2cdf1a56f08417f97afa0af8692c"
+    },
+    {
+      "source": "src/renderer/src/components/pull-request-page/cache/file-content.ts",
+      "bundled": null,
+      "role": "representative-pure-model",
+      "portability": "inventory",
+      "required": true,
+      "sha256": "e03ec26a8ee97fab08d37622dd60e4ddd6d3c7c81e1254859c6fc180f751b9de"
+    },
+    {
+      "source": "src/renderer/src/components/pull-request-page/cache/file-content.test.ts",
+      "bundled": null,
+      "role": "representative-model-test",
+      "portability": "inventory",
+      "required": true,
+      "sha256": "1cde48dbc90fd97bb8f13e4a279a8dd01eb1013dd3785c2629cad2ad5da0450d"
+    },
+    {
+      "source": "src/renderer/src/components/sidebar/worktree-list/grouping/build-rows.test.ts",
+      "bundled": null,
+      "role": "representative-model-test",
+      "portability": "inventory",
+      "required": true,
+      "sha256": "ddd0ab05c673d5ff82ec9a861fcfa9e60f99e46b8fe7679a16c16369d494a786"
+    },
+    {
+      "source": "src/renderer/src/components/sidebar/worktree-list/viewport/VirtualizedWorktreeViewport.tsx",
+      "bundled": null,
+      "role": "representative-virtualization",
+      "portability": "inventory",
+      "required": true,
+      "sha256": "23637ef27b9aa779de9f9727b0f477db5bdddaf1b853421e6df4bd1f63430e24"
+    },
+    {
+      "source": "src/renderer/src/components/sidebar/worktree-list/viewport/virtual-rows.ts",
+      "bundled": null,
+      "role": "representative-pure-model",
+      "portability": "inventory",
+      "required": true,
+      "sha256": "67de4f0ab7011be16720fa0a344a54f4844d82317b8bd44a2c585a513c8868b4"
+    },
+    {
+      "source": "src/renderer/src/components/sidebar/worktree-list/viewport/virtual-rows.test.ts",
+      "bundled": null,
+      "role": "representative-model-test",
+      "portability": "inventory",
+      "required": true,
+      "sha256": "4ff07c4c9b8477b0f45207e1674ed9cd384ac5e4f20ed9f2a207724969ed2845"
+    },
+    {
+      "source": "src/renderer/src/components/error-boundaries/RecoverableRenderErrorBoundary.tsx",
+      "bundled": null,
+      "role": "representative-error-boundary",
+      "portability": "inventory",
+      "required": true,
+      "sha256": "241f296c51ca8fd0bb2d9f1c070c5284f940819ba028229a99ff4097a3687c07"
+    },
+    {
+      "source": "src/renderer/src/components/error-boundaries/RecoverableRenderErrorBoundary.lazy-chunk.test.tsx",
+      "bundled": null,
+      "role": "representative-boundary-test",
+      "portability": "inventory",
+      "required": true,
+      "sha256": "6de0e8c0548aea4729dbe878a3202ba1f7ba7ab10f7c75130aff624c0fe95ea2"
+    },
+    {
+      "source": "src/renderer/src/lib/lazy-with-retry.ts",
+      "bundled": null,
+      "role": "representative-lazy-loading",
+      "portability": "inventory",
+      "required": true,
+      "sha256": "f2a3cd3839f325329958ad4386ee944d3b5108620290e455d16ba618ae12f1de"
+    },
+    {
+      "source": "src/renderer/src/store/selectors.ts",
+      "bundled": null,
+      "role": "representative-selector",
+      "portability": "inventory",
+      "required": true,
+      "sha256": "a4065df467682fcd401476b949ed39ce46643096e5411f9d7ab9255047cb2d15"
+    },
+    {
+      "source": "src/renderer/src/store/selectors.test.ts",
+      "bundled": null,
+      "role": "representative-model-test",
+      "portability": "inventory",
+      "required": true,
+      "sha256": "c0bc12d11a24303b99d9c04026bb43c71695fc4e3c98ed9e632854539bf50e18"
+    },
+    {
+      "source": "src/renderer/src/app-startup-routing.test.ts",
+      "bundled": null,
+      "role": "representative-routing-test",
+      "portability": "inventory",
+      "required": true,
+      "sha256": "c238b07a58ffa11c7239e1faff7287aa6e698fa2542d5399572f5f8149d016eb"
+    },
+    {
+      "source": ".oxlintrc.json",
+      "bundled": null,
+      "role": "oxlint-config",
+      "portability": "orca-only",
+      "required": true,
+      "sha256": "38b2a1c1bb6c615dbeb4ba27eedc710ecb48204ba4a6522047f5d327a1934f92"
+    },
+    {
+      "source": "config/oxlint-react-doctor.json",
+      "bundled": "config/oxlint-react-doctor.json",
+      "role": "react-doctor-config",
+      "portability": "portable",
+      "required": true,
+      "sha256": "5b718db6c35c5d0daf45584361a0c8e9aa367e304415227638747c5ba3da35b1"
+    },
+    {
+      "source": "config/oxlint-code-quality-type-aware.json",
+      "bundled": "config/oxlint-code-quality-type-aware.json",
+      "role": "code-quality-config",
+      "portability": "conditional",
+      "required": true,
+      "sha256": "6f06b9a44a737dbd6b101718d7d949f7f238c1e8f24ebd3f06385c044dec8b2c"
+    },
+    {
+      "source": "config/oxlint-code-quality-native-plugins.json",
+      "bundled": "config/oxlint-code-quality-native-plugins.json",
+      "role": "code-quality-config",
+      "portability": "conditional",
+      "required": true,
+      "sha256": "fd1850538785f26b644b1865840c40e3270209d534d468ed176b5a10e2197c21"
+    },
+    {
+      "source": "config/oxlint-plugins/app-store-performance.mjs",
+      "bundled": "config/oxlint-plugins/app-store-performance.mjs",
+      "role": "oxlint-plugin",
+      "portability": "conditional",
+      "required": true,
+      "sha256": "06c771be5c9d2b6115416bdff8b52d430240019247ff6d7a71d6b4991accd257"
+    },
+    {
+      "source": "config/oxlint-plugins/mobile-pairing-qrcode-import.mjs",
+      "bundled": null,
+      "role": "oxlint-plugin",
+      "portability": "orca-only",
+      "required": true,
+      "sha256": "813c5dbd6908a4a4ce1bbbd3da525cb809bbd05a422dc5ccb3c9376202d290d7"
+    },
+    {
+      "source": "config/oxlint-plugins/quadratic-buffer-concat.mjs",
+      "bundled": "config/oxlint-plugins/quadratic-buffer-concat.mjs",
+      "role": "oxlint-plugin",
+      "portability": "conditional",
+      "required": true,
+      "sha256": "88cc326f7d8bc550526e086d9911dc6725d495aa2077943dfcf1580d7216baa6"
+    },
+    {
+      "source": "config/oxlint-plugins/renderer-scrollbar-style.mjs",
+      "bundled": null,
+      "role": "oxlint-plugin",
+      "portability": "orca-only",
+      "required": true,
+      "sha256": "c9f023a8a56a97db0fb781fbef6acdf6d4139e6f406430475973d103b50f542e"
+    },
+    {
+      "source": "config/scripts/oxlint-plugin-test-runner.mjs",
+      "bundled": "config/scripts/oxlint-plugin-test-runner.mjs",
+      "role": "oxlint-plugin-test-runner",
+      "portability": "conditional",
+      "required": true,
+      "sha256": "ed4f8fd7469c239204371cf96ff94fd6fefa50f6629d2f2736db8aea60e7a152"
+    },
+    {
+      "source": "config/scripts/app-store-performance-plugin.test.mjs",
+      "bundled": "config/scripts/app-store-performance-plugin.test.mjs",
+      "role": "oxlint-plugin-test",
+      "portability": "conditional",
+      "required": true,
+      "sha256": "d0f10a607281eac809499f3f15ca5626b254797c727b2eb151d8317156dcce6d"
+    },
+    {
+      "source": "config/scripts/mobile-pairing-qrcode-import-plugin.test.mjs",
+      "bundled": null,
+      "role": "oxlint-plugin-test",
+      "portability": "orca-only",
+      "required": true,
+      "sha256": "43d4e895bedb26704f6b1daa0a68e86784ab5f93841974983747bb6bf55c5ee3"
+    },
+    {
+      "source": "config/scripts/quadratic-buffer-concat-plugin.test.mjs",
+      "bundled": "config/scripts/quadratic-buffer-concat-plugin.test.mjs",
+      "role": "oxlint-plugin-test",
+      "portability": "conditional",
+      "required": true,
+      "sha256": "1ca8b2f53e751bd317da597e17bf85a4c4736805a6f4baaec3a1acba5739018c"
+    },
+    {
+      "source": "config/scripts/renderer-scrollbar-style-plugin.test.mjs",
+      "bundled": null,
+      "role": "oxlint-plugin-test",
+      "portability": "orca-only",
+      "required": true,
+      "sha256": "1235fcec6c7936ccd01edfcc06c6aa8dffb7c07e9626d157f4e9a3238dcb67f6"
+    },
+    {
+      "source": "config/scripts/check-react-doctor-changed.mjs",
+      "bundled": "config/scripts/check-react-doctor-changed.mjs",
+      "role": "changed-code-react-doctor",
+      "portability": "conditional",
+      "required": true,
+      "sha256": "080aa211a03f892ba05c68512902d4b249390ebb08b190157a394f722b2089c5"
+    },
+    {
+      "source": "config/scripts/lint-react-doctor-changed.mjs",
+      "bundled": "config/scripts/lint-react-doctor-changed.mjs",
+      "role": "changed-code-react-doctor",
+      "portability": "conditional",
+      "required": true,
+      "sha256": "d5380b6101ba9a1aab4d7ed7e50e8087d2d56ba24d064b5f082939cd845284f2"
+    },
+    {
+      "source": "config/scripts/check-changed-code-quality.mjs",
+      "bundled": "config/scripts/check-changed-code-quality.mjs",
+      "role": "changed-code-quality",
+      "portability": "conditional",
+      "required": true,
+      "sha256": "52687f4d299b2465065b380fc7cbbaa59a29c3f3481c0177348a9c4d570eb32c"
+    },
+    {
+      "source": "config/scripts/check-changed-code-quality.test.mjs",
+      "bundled": "config/scripts/check-changed-code-quality.test.mjs",
+      "role": "changed-code-quality-test",
+      "portability": "conditional",
+      "required": true,
+      "sha256": "9f2bbe2285cf67443281e52e287bb21ee95b63355c7bf3e4aeae8481695a434c"
+    },
+    {
+      "source": "config/scripts/git-pull-request-diff-base.mjs",
+      "bundled": "config/scripts/git-pull-request-diff-base.mjs",
+      "role": "diff-base-helper",
+      "portability": "portable",
+      "required": true,
+      "sha256": "752f77298364cd0f20fdc63df2c0f729be6f14954979b8d021a91d28ad6f10c8"
+    },
+    {
+      "source": "config/scripts/git-pull-request-diff-base.test.mjs",
+      "bundled": "config/scripts/git-pull-request-diff-base.test.mjs",
+      "role": "diff-base-helper-test",
+      "portability": "portable",
+      "required": true,
+      "sha256": "d5ec01fd3bc4522c1a47010f526371d20df987beeca4f5352dade188ff536de1"
+    },
+    {
+      "source": "config/max-lines-baseline.txt",
+      "bundled": null,
+      "role": "max-lines-baseline",
+      "portability": "orca-only",
+      "required": true,
+      "sha256": "a604d858e44059197aa016b6c5330de3c7d42d4ee09e8505533caae1607e7dd1"
+    },
+    {
+      "source": "config/scripts/check-max-lines-ratchet.mjs",
+      "bundled": "config/scripts/check-max-lines-ratchet.mjs",
+      "role": "max-lines-ratchet",
+      "portability": "conditional",
+      "required": true,
+      "sha256": "776f036345fe51793d97b09822324bdb06b68adb63db64a0619b163c6ce42049"
+    },
+    {
+      "source": "config/scripts/check-max-lines-ratchet.test.mjs",
+      "bundled": "config/scripts/check-max-lines-ratchet.test.mjs",
+      "role": "max-lines-ratchet-test",
+      "portability": "conditional",
+      "required": true,
+      "sha256": "02aca5a747baf7bd3e978e771a3f194cb973b885cb3401886cab88346d9994c5"
+    },
+    {
+      "source": "package.json",
+      "bundled": null,
+      "role": "package-script-evidence",
+      "portability": "inventory",
+      "required": true,
+      "sha256": "1a908e1c5d97fc30bc463b8c9a19f10106a010a0404c031c04ce7c8d537418f2"
+    },
+    {
+      "source": ".github/workflows/pr.yml",
+      "bundled": null,
+      "role": "ci-wiring",
+      "portability": "inventory",
+      "required": true,
+      "sha256": "1be73b7d8f53a41a526b792c7a1c95eb9db89ef27818b136d59643d6027d3e19"
+    },
+    {
+      "source": ".github/pull_request_template.md",
+      "bundled": null,
+      "role": "pr-template",
+      "portability": "inventory",
+      "required": true,
+      "sha256": "6f94a422c99a468f6228b739d949ecdb2778928b8402cc87c158d70898ce18ad"
+    }
+  ]
+}

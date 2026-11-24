@@ -1,0 +1,12 @@
+import { describe, expect, it } from 'vitest'
+
+import { create__COMPONENT_NAME__Model } from '__IMPORT_PATH__'
+
+describe('create__COMPONENT_NAME__Model', () => {
+  it('creates the serializable view model', () => {
+    expect(create__COMPONENT_NAME__Model('plugin-card', 'Plugin card')).toEqual({
+      id: 'plugin-card',
+      label: 'Plugin card',
+    })
+  })
+})

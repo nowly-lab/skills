@@ -1,0 +1,4 @@
+interface:
+  display_name: "DMMF Implementation"
+  short_description: "Build readable core workflow states"
+  default_prompt: "Use $dmmf-implementation to turn this modeled workflow into TypeScript workflow-state logic, named sub-workflows for long orchestration branches, context model reads/writes, transactionally saved events, Zod request/response schemas, CLI/job skipped response variants, adapter error status overrides, Mermaid diagrams, and living document updates."

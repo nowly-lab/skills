@@ -1,0 +1,29 @@
+interface:
+  display_name: "Scrum Domain Modeling"
+  short_description: "Scrum events for domain modeling"
+  default_prompt: "Use $scrum-domain-modeling to read or update the product domain model (JSON rendered to an EventStorming board and other HTML pages)."
+subagents:
+  event_source_extractor:
+    display_name: "Event Source Extractor"
+    use_when: "Extract candidate business events and commands from one source only."
+    contract_ref: "../references/subagent-contracts.md#event-source-extractor"
+  organization_scope_auditor:
+    display_name: "Organization Scope Auditor"
+    use_when: "Audit one code area for missing organization scoping or cross-organization reference risk."
+    contract_ref: "../references/subagent-contracts.md#organization-scope-auditor"
+  mermaid_draft_worker:
+    display_name: "Mermaid Draft Worker"
+    use_when: "Draft Mermaid diagrams from an already-approved event/command/context list."
+    contract_ref: "../references/subagent-contracts.md#mermaid-draft-worker"
+  workflow_test_planner:
+    display_name: "Workflow Test Planner"
+    use_when: "List tests for one workflow slice without changing implementation."
+    contract_ref: "../references/subagent-contracts.md#workflow-test-planner"
+  glossary_question_extractor:
+    display_name: "Glossary Question Extractor"
+    use_when: "Extract candidate glossary terms and open questions from one source."
+    contract_ref: "../references/subagent-contracts.md#glossary-question-extractor"
+  implementation_readiness_checker:
+    display_name: "Implementation Readiness Checker"
+    use_when: "Mechanically check whether one workflow/context model is ready for sprint implementation."
+    contract_ref: "../references/subagent-contracts.md#implementation-readiness-checker"

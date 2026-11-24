@@ -1,0 +1,108 @@
+[
+ {
+  "command": {
+   "defineVariablesCommand": {
+    "env": {},
+    "optional": false
+   }
+  },
+  "metadata": {
+   "status": "COMPLETED",
+   "timestamp": 1794653903488,
+   "duration": 2,
+   "sequenceNumber": 0,
+   "depth": 0
+  }
+ },
+ {
+  "command": {
+   "applyConfigurationCommand": {
+    "config": {
+     "appId": "com.example.app"
+    },
+    "optional": false
+   }
+  },
+  "metadata": {
+   "status": "COMPLETED",
+   "timestamp": 1794653903491,
+   "duration": 1,
+   "sequenceNumber": 1,
+   "depth": 0
+  }
+ },
+ {
+  "command": {
+   "tapOnElement": {
+    "selector": {
+     "idRegex": "auth.server",
+     "optional": false
+    },
+    "retryIfNoChange": false,
+    "waitUntilVisible": false,
+    "longPress": false,
+    "label": "サービスのURLを入力",
+    "optional": false
+   }
+  },
+  "metadata": {
+   "status": "COMPLETED",
+   "timestamp": 1794653903492,
+   "duration": 1060,
+   "sequenceNumber": 2,
+   "depth": 0
+  }
+ },
+ {
+  "command": {
+   "inputTextCommand": {
+    "text": "https://demo.example.com",
+    "optional": false
+   }
+  },
+  "metadata": {
+   "status": "COMPLETED",
+   "timestamp": 1794653904553,
+   "duration": 1864,
+   "sequenceNumber": 3,
+   "depth": 0
+  }
+ },
+ {
+  "command": {
+   "tapOnElement": {
+    "selector": {
+     "textRegex": "Continue",
+     "optional": false
+    },
+    "retryIfNoChange": false,
+    "waitUntilVisible": false,
+    "longPress": false,
+    "label": "Continue で接続",
+    "optional": false
+   }
+  },
+  "metadata": {
+   "status": "COMPLETED",
+   "timestamp": 1794653906418,
+   "duration": 1121,
+   "sequenceNumber": 4,
+   "depth": 0
+  }
+ },
+ {
+  "command": {
+   "waitForAnimationToEndCommand": {
+    "timeout": "3000",
+    "optional": false
+   }
+  },
+  "metadata": {
+   "status": "COMPLETED",
+   "timestamp": 1794653907539,
+   "duration": 363,
+   "sequenceNumber": 5,
+   "depth": 0
+  }
+ }
+]

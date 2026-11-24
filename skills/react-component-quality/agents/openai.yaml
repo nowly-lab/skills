@@ -1,0 +1,4 @@
+interface:
+  display_name: "React Component Quality"
+  short_description: "Set up and refactor React quality gates"
+  default_prompt: "Use $react-component-quality to audit and improve this React project's component quality."

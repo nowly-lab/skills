@@ -1,0 +1,14 @@
+import type { ReactNode } from 'react'
+
+type __COMPONENT_NAME__Props = {
+  children?: ReactNode
+  className?: string
+}
+
+export function __COMPONENT_NAME__({ children, className }: __COMPONENT_NAME__Props) {
+  return (
+    <section aria-label="__COMPONENT_NAME__" className={className} data-component="__KEBAB_NAME__">
+      {children}
+    </section>
+  )
+}
