@@ -1,6 +1,6 @@
 ---
 name: why-why-talk-tips
-description: Tips for why-why-talk (packages/why-why-talk in nowly-lab/mcp, formerly nowly-lab/why-why-talk and why-why-mcp), the CLI that opens a local page where the person talks freely, picks questions from the talk and attached files, deep-dives them by voice with Gemini Live and sends per-question directions back to the agent: structure, commands, real Gemini checks, release and constraints.
+description: "Tips for why-why-talk (packages/why-why-talk in nowly-lab/mcp, formerly nowly-lab/why-why-talk and why-why-mcp), the CLI that opens a local page where the person talks freely, picks questions from the talk and attached files, deep-dives them by voice with Gemini Live and sends per-question directions back to the agent: structure, commands, real Gemini checks, release and constraints."
 ---
 
 # why-why-talk tips

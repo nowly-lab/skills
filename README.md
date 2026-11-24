@@ -4,12 +4,15 @@ Agent skills (Claude Code, Codex and other agents that read `SKILL.md`) used at 
 
 ## Install
 
+With the [skills CLI](https://github.com/vercel-labs/skills):
+
 ```bash
-git clone git@github.com:nowly-lab/skills.git ~/workspaces/nowly-lab/skills
-~/workspaces/nowly-lab/skills/install.sh
+npx skills add nowly-lab/skills -g -s '*' -y
 ```
 
-`install.sh` links each folder in `skills/` into `~/.claude/skills` and `~/.agents/skills`. Because they are links, an edit in this checkout takes effect at once and shows up in `git diff`. To update on another machine, `git pull`; run `install.sh` again after skills are added or removed. It never replaces an existing folder or a link to somewhere else; it reports them as conflicts. `./install.sh --dry-run` shows what it would do, `./install.sh --uninstall` removes its links.
+This installs every skill globally (`~/.agents/skills`, linked into each agent you use, such as `~/.claude/skills` for Claude Code). Pick skills with `-s <name>` and agents with `-a <agent>` (for example `-a claude-code codex`). Update with `npx skills update -g`, remove with `npx skills remove -g <name>`.
+
+To change a skill, edit it in a clone of this repository, open a pull request, and run `npx skills update -g` after it is merged.
 
 Product-specific knowledge (repository structure, release targets, secrets) does not belong here. Keep it in each product's own `AGENTS.md`/`CLAUDE.md` or in a private `<product>-tips` skill; the skills here read those when present.
 
