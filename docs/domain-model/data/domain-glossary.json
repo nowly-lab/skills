@@ -266,6 +266,42 @@
           "role": "source"
         }
       ]
+    },
+    {
+      "term": "依頼の一覧",
+      "meaning": "声の依頼ごとに送り先リポジトリ・ワーカー（dispatch）・状態を記録した表",
+      "code": [
+        "routes.json"
+      ],
+      "nodes": [
+        "vr-route-rule"
+      ],
+      "evidence": [
+        {
+          "path": "skills/voice-router/SKILL.md",
+          "symbol": "routes.json",
+          "role": "source"
+        }
+      ],
+      "changed": true
+    },
+    {
+      "term": "番",
+      "meaning": "このセッションが届いた知らせ一件をさばき終えるまでの一回の応答",
+      "code": [
+        "turn"
+      ],
+      "nodes": [
+        "vr-route"
+      ],
+      "evidence": [
+        {
+          "path": "skills/voice-router/SKILL.md",
+          "symbol": "one message per turn",
+          "role": "source"
+        }
+      ],
+      "changed": true
     }
   ]
 }

@@ -16,6 +16,7 @@ jobs:
           node-version: '22'
       - run: ./scripts/check-public.sh
       - run: python3 scripts/test_release_policy.py
+      - run: pip install pyyaml && python3 scripts/test_voice_router.py
       - run: python3 -m unittest discover -p 'test_*.py'
         working-directory: skills/openscreen-demo/scripts
       - run: node --test scripts/*.test.mjs && node scripts/verify-skill-assets.mjs

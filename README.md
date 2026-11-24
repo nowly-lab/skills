@@ -24,7 +24,7 @@ Product-specific knowledge (repository structure, release targets, secrets) does
 | Domain modeling | `scrum-domain-modeling`, `dmmf-implementation` |
 | UI and design | `client-ui-design`, `ux-review`, `design-diff`, `react-component-quality`, `appstore-screenshot-marketing` |
 | Demo videos | `openscreen-demo`, `demo-nowly` |
-| Meetings and thinking | `meeting-hub`, `why-why-talk` |
+| Meetings and thinking | `meeting-hub`, `voice-router`, `why-why-talk` |
 | MCP tools ([nowly-lab/mcp](https://github.com/nowly-lab/mcp), for nowly-lab members) | `mcp-tips`, `event-storming-mcp-tips`, `knowledge-mcp-tips`, `marketing-mcp-tips`, `meeting-voice-mcp-tips`, `speak-mcp-tips`, `why-why-talk-tips` |
 | [Orca](https://github.com/stablyai/orca) | `orca-pull-all-main`, `orca-push-all-main` (these use the `orca-cli` skill that ships with Orca) |
 
