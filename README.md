@@ -38,3 +38,11 @@ Keep skills free of private details: no absolute paths, host names, private repo
 ```bash
 ./scripts/check-public.sh
 ```
+
+Tests:
+
+```bash
+python3 scripts/test_release_policy.py
+(cd skills/openscreen-demo/scripts && python3 -m unittest discover -p 'test_*.py')
+(cd skills/react-component-quality && node --test scripts/*.test.mjs && node scripts/verify-skill-assets.mjs)
+```
