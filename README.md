@@ -25,6 +25,8 @@ Product-specific knowledge (repository structure, release targets, secrets) does
 | MCP tools ([nowly-lab/mcp](https://github.com/nowly-lab/mcp), for nowly-lab members) | `mcp-tips`, `event-storming-mcp-tips`, `knowledge-mcp-tips`, `marketing-mcp-tips`, `meeting-voice-mcp-tips`, `speak-mcp-tips`, `why-why-talk-tips` |
 | [Orca](https://github.com/stablyai/orca) | `orca-pull-all-main`, `orca-push-all-main` (these use the `orca-cli` skill that ships with Orca) |
 
+The domain model of the development flow these skills define is in [`docs/domain-model/`](docs/domain-model/index.html) (data in `data/`, pages rendered by `event-storming-mcp`; see `scrum-domain-modeling`).
+
 Some skills use the MCP servers in `nowly-lab/mcp`, a private repository. They are marked "For nowly-lab members" and work only for an account with access to it. This includes `planning-nowly`, `implementation-nowly` and `demo-nowly`, which keep the domain model and demo-video records in those servers.
 
 ## License

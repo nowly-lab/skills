@@ -1,0 +1,315 @@
+<!doctype html>
+<!-- 生成物: 直接編集しないでください。元データ: data/*.json。scrum-domain-modeling の scripts/domain-model.mjs render で作り直します。 -->
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="generator" content="scrum-domain-modeling/domain-model.mjs">
+<title>ワークフロー · nowly-lab/skills</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Klee+One:wght@600&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=JetBrains+Mono:wght@400&display=swap">
+<style>
+:root {
+  --wall: #fbfbf9; --wall-dot: #dcdcd4; --paper: #ffffff; --ink: #24241f; --ink-soft: #64645b;
+  --line: #d9d9cf; --ring: #6d6d66; --accent: #2f5bd3; --focus: #2563eb; --row: #f4f4ef;
+  --ok: #dbeafe; --bad: #fde2e4; --skip: #ececea; --undef: #fff4cc;
+  --s-event: #ff9e4f; --s-command: #a9cdf1; --s-policy: #b985ca; --s-external: #eda1c6;
+  --s-aggregate: #f4ce2c; --s-readModel: #c6e15c; --s-actor: #fdf6b6; --s-hotspot: #ef7088; --s-ink: #1c1a14; --hot: #ff4030;
+  --f-note: "Klee One", "Hiragino Maru Gothic ProN", "Yu Gothic", cursive;
+  --f-ui: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --wall: #1c1d1a; --wall-dot: #30312c; --paper: #24251f; --ink: #ecece6; --ink-soft: #a6a69c; --line: #3a3b35;
+  --ring: #a8a89e; --accent: #8fb0ff; --focus: #93c5fd; --row: #2a2b25; --ok: #1e3a5f; --bad: #5b2530; --skip: #34352f; --undef: #4a4220; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --wall: #1c1d1a; --wall-dot: #30312c; --paper: #24251f; --ink: #ecece6; --ink-soft: #a6a69c; --line: #3a3b35;
+  --ring: #a8a89e; --accent: #8fb0ff; --focus: #93c5fd; --row: #2a2b25; --ok: #1e3a5f; --bad: #5b2530; --skip: #34352f; --undef: #4a4220; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--wall); color: var(--ink); font: 14px/1.65 var(--f-ui); }
+a { color: var(--accent); }
+.top { position: sticky; top: 0; z-index: 30; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 10px max(16px, env(safe-area-inset-left, 0px)); background: var(--paper); border-bottom: 1px solid var(--line); }
+.crumb { font-weight: 700; } .crumb span { color: var(--ink-soft); font-weight: 500; margin: 0 6px; }
+.back { text-decoration: none; border: 1px solid var(--line); border-radius: 6px; padding: 3px 12px; color: var(--ink); background: var(--paper); }
+main { padding: 24px max(16px, env(safe-area-inset-left, 0px)) 48px; display: grid; gap: 22px; min-width: 0; }
+h1 { margin: 0; font-size: 26px; line-height: 1.3; text-wrap: balance; }
+h2 { margin: 0; font-size: 18px; text-wrap: balance; }
+h3 { margin: 0; font-size: 15px; }
+.lede { margin: 4px 0 0; color: var(--ink-soft); max-width: 80ch; }
+.meta { font-size: 12px; color: var(--ink-soft); font-family: var(--f-mono); }
+.card { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 16px; min-width: 0; }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; background: var(--paper); }
+th, td { border: 1px solid var(--line); padding: 7px 10px; text-align: left; vertical-align: top; }
+th { background: var(--row); font-weight: 700; white-space: nowrap; }
+code, .path { font-family: var(--f-mono); font-size: 12px; overflow-wrap: anywhere; }
+.chip { display: inline-block; padding: 1px 8px; margin: 2px 4px 2px 0; border-radius: 4px; color: var(--s-ink); font-size: 12px; text-decoration: none; }
+.code { display: inline-block; padding: 0 6px; margin: 2px 4px 2px 0; border-radius: 4px; background: var(--row); border: 1px solid var(--line); font: 12px var(--f-mono); }
+.badge { display: inline-block; padding: 0 7px; border-radius: 999px; font-size: 11px; background: rgba(28,26,20,.14); color: var(--s-ink); margin-left: 6px; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; }
+.legend i { display: inline-block; width: 18px; height: 18px; border-radius: 2px; vertical-align: -4px; margin-right: 6px; box-shadow: 0 1px 2px rgba(0,0,0,.25); }
+.legend small { color: var(--ink-soft); margin-left: 4px; }
+.foot { font-size: 12px; color: var(--ink-soft); }
+ul.plain { margin: 0; padding-left: 18px; }
+/* What the current plan changes: pulses while main has .show-changed (the toggle on each page). */
+.changes { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; border-left: 4px solid var(--hot); }
+.changes .list { flex: 1 1 320px; min-width: 0; }
+.changes a.item { margin-right: 10px; white-space: nowrap; }
+.toggle { font-size: 13px; white-space: nowrap; }
+.new { display: inline-block; padding: 0 7px; margin-left: 6px; border-radius: 999px; background: var(--hot); color: #fff; font: 700 11px/1.6 var(--f-ui); vertical-align: 1px; }
+@keyframes changed-ping {
+  0% { box-shadow: 0 0 0 4px var(--ink), 0 0 0 4px rgba(255,64,48,.95), 0 10px 14px -6px rgba(0,0,0,.5); filter: brightness(1.15); }
+  20% { filter: brightness(1); }
+  70%, 100% { box-shadow: 0 0 0 4px var(--ink), 0 0 0 40px rgba(255,64,48,0), 0 10px 14px -6px rgba(0,0,0,.5); filter: brightness(1); } }
+@keyframes chip-ping { 0% { box-shadow: 0 0 0 2px var(--ink), 0 0 0 2px rgba(255,64,48,.95); } 70%, 100% { box-shadow: 0 0 0 2px var(--ink), 0 0 0 12px rgba(255,64,48,0); } }
+@keyframes row-flash { 0% { background-color: rgba(255,64,48,.38); } 60%, 100% { background-color: rgba(255,64,48,.1); } }
+@keyframes svg-blink { 50% { stroke-opacity: .25; } }
+.show-changed .chip.changed { box-shadow: 0 0 0 2px var(--ink); animation: chip-ping 1.2s ease-out infinite; }
+.show-changed .is-changed > td, .show-changed .is-changed > th, .show-changed td.is-changed { animation: row-flash 1.2s ease-out infinite; }
+.show-changed tr.is-changed > :first-child { box-shadow: inset 4px 0 0 var(--hot); }
+.show-changed .lc.is-changed, .show-changed nav a.is-changed { outline: 3px solid var(--hot); outline-offset: 2px; }
+.show-changed .gbox.is-changed { stroke: var(--hot); stroke-width: 4; animation: svg-blink 1.2s ease-in-out infinite; }
+.show-changed .gedge.is-changed { stroke: var(--hot); stroke-width: 3; animation: svg-blink 1.2s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .show-changed .chip.changed, .show-changed .is-changed > td, .show-changed .is-changed > th, .show-changed td.is-changed, .show-changed .gbox.is-changed, .show-changed .gedge.is-changed { animation: none; }
+  .show-changed .is-changed > td, .show-changed .is-changed > th, .show-changed td.is-changed { background-color: rgba(255,64,48,.18); } }
+
+.zoomable { position: relative; min-width: 0; }
+.zoom-view { overflow: auto; overscroll-behavior: contain; touch-action: pan-x pan-y; max-height: 80vh; }
+.zoom-view { cursor: grab; }
+.zoom-view.panning, .zoom-view.panning * { cursor: grabbing !important; user-select: none; }
+.zoom-view:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.zoom-content { width: max-content; }
+.zoom-ctrl { position: absolute; top: 8px; right: 8px; z-index: 25; display: flex; align-items: center; gap: 2px; padding: 3px;
+  background: var(--paper); border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,.12); }
+.zoom-ctrl button { min-width: 32px; height: 30px; padding: 0 8px; border: 0; border-radius: 6px; background: transparent; color: var(--ink); font: 500 14px var(--f-ui); cursor: pointer; }
+.zoom-ctrl button:hover { background: var(--row); }
+.zoom-ctrl button:focus-visible { outline: 2px solid var(--focus); }
+.zoom-ctrl output { min-width: 3.4em; text-align: center; font: 12px var(--f-mono); color: var(--ink-soft); }
+.zoomable:fullscreen, .zoomable.zoom-fill { background: var(--paper); }
+.zoomable.zoom-fill { position: fixed; inset: 0; z-index: 1000; }
+.zoomable:fullscreen .zoom-view, .zoomable.zoom-fill .zoom-view { max-height: none; height: 100vh !important; }
+.graph { display: block; max-width: none; }
+.gbox { fill: var(--paper); stroke: var(--ring); stroke-width: 1.5; }
+.gbox.initial { stroke-width: 3; } .gbox.final { stroke-dasharray: 5 3; }
+.gtext { font: 700 15px var(--f-ui); fill: var(--ink); } .gsub { font: 11px var(--f-mono); fill: var(--ink-soft); }
+.gedge { fill: none; stroke: var(--ink); stroke-width: 1.6; }
+.glabel { font: 12px var(--f-ui); fill: var(--ink); } .glabel-bg { fill: var(--wall); }
+.headfill { fill: var(--ink); }
+.lc { display: grid; gap: 12px; } .diagram { background: var(--wall); border: 1px solid var(--line); border-radius: 6px; }
+.matrix td, .matrix th { text-align: center; } .matrix th[scope=row] { text-align: left; }
+.m-ok { background: var(--ok); } .m-bad { background: var(--bad); } .m-skip { background: var(--skip); } .m-undef { background: var(--undef); color: var(--ink-soft); }
+.show-changed .matrix td.is-changed { box-shadow: inset 0 0 0 3px var(--hot); }
+.matrix small { display: block; font-size: 11px; color: var(--ink-soft); }
+.mlegend i { box-shadow: none; border: 1px solid var(--line); }</style>
+</head>
+<body>
+<header class="top"><div class="crumb">nowly-lab/skills<span>/</span>ドメインモデル<span>/</span>ワークフロー</div><a class="back" href="index.html">← 一覧へ</a></header>
+<main class="show-changed" id="main">
+<div><h1>現在のライフサイクル</h1><div class="meta">確認したリビジョン dd7ba79 · 2026-11-24</div></div>
+
+<nav class="card"><b>ライフサイクル</b>: <a class="" href="#lc-delivery-life">計画から公開までの手順</a> · <a class="" href="#lc-model-life">モデルと描画の整合性</a> · <a class="" href="#lc-quality-life">品質基盤の導入</a> · <a class="" href="#lc-version-life">会議中のモデルの版</a></nav>
+<section class="card lc" id="lc-delivery-life"><h2>計画から公開までの手順</h2><div class="meta">ドメイン: 計画・実装・レビュー</div><p class="lede">コードまたは手順で確認できる遷移だけを記載。未定義の状態×契機はホットスポット「procedural-states」を参照。</p>
+<h3>状態遷移図</h3><div class="zoomable" data-fit="width">
+<div class="zoom-ctrl" role="toolbar" aria-label="拡大縮小"><button type="button" data-z="out" aria-label="縮小">−</button><output aria-live="polite">100%</output><button type="button" data-z="in" aria-label="拡大">＋</button><button type="button" data-z="fit">全体</button><button type="button" data-z="one">等倍</button><button type="button" data-z="full" aria-pressed="false">全画面</button></div>
+<div class="zoom-view diagram" tabindex="0" aria-label="ピンチまたは Ctrl/⌘ + ホイールで拡大縮小、ドラッグで移動"><div class="zoom-content"><svg class="graph" viewBox="0 0 2057 101" width="2057" height="101" role="img" aria-label="計画から公開までの手順"><defs><marker id="gh-11" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 1L10 5L0 9z" class="headfill"/></marker></defs><polyline class="gedge" points="139,51 445,51" marker-end="url(#gh-11)"/><rect class="glabel-bg" x="209" y="28" width="166" height="18" rx="3"/><text class="glabel" x="292" y="41" text-anchor="middle">対象を調査して計画を整える</text><polyline class="gedge" points="571,51 853,51" marker-end="url(#gh-11)"/><rect class="glabel-bg" x="641" y="28" width="142" height="18" rx="3"/><text class="glabel" x="712" y="41" text-anchor="middle">計画を実装して検証する</text><polyline class="gedge" points="979,51 1333,51" marker-end="url(#gh-11)"/><rect class="glabel-bg" x="1049" y="28" width="214" height="18" rx="3"/><text class="glabel" x="1156" y="41" text-anchor="middle">成果物をレビューして指摘を解消する</text><polyline class="gedge" points="1489,51 1903,51" marker-end="url(#gh-11)"/><rect class="glabel-bg" x="1559" y="28" width="274" height="18" rx="3"/><text class="glabel" x="1696" y="41" text-anchor="middle">許可された変更をマージして既存公開面へ届ける</text><rect class="gbox initial" x="28" y="29" width="111" height="44" rx="8"/><text class="gtext" x="83.5" y="56" text-anchor="middle">計画準備中</text><rect class="gbox" x="445" y="29" width="126" height="44" rx="8"/><text class="gtext" x="508" y="56" text-anchor="middle">実装準備完了</text><rect class="gbox" x="853" y="29" width="126" height="44" rx="8"/><text class="gtext" x="916" y="56" text-anchor="middle">実装検証済み</text><rect class="gbox" x="1333" y="29" width="156" height="44" rx="8"/><text class="gtext" x="1411" y="56" text-anchor="middle">レビュー解決済み</text><rect class="gbox" x="1903" y="29" width="126" height="44" rx="8"/><text class="gtext" x="1966" y="56" text-anchor="middle">公開確認済み</text></svg></div></div>
+</div>
+<h3>遷移表</h3><div class="scroll"><table><thead><tr><th>遷移前</th><th>コマンド・イベント</th><th>条件</th><th>遷移後</th><th>起きること</th><th>証拠</th></tr></thead><tbody><tr class=""><td>計画準備中</td><td><a class="chip" href="big-picture.html#n-plan" style="background:var(--s-command)" title="コマンド">対象を調査して計画を整える</a></td><td>必要な計画内容と証拠が揃う</td><td>実装準備完了</td><td>ready を記録</td><td><div class="path">skills/implementation-nowly/SKILL.md <span class="code">handoff</span></div></td></tr><tr class=""><td>実装準備完了</td><td><a class="chip" href="big-picture.html#n-implement" style="background:var(--s-command)" title="コマンド">計画を実装して検証する</a></td><td>全タスクと検証がGREEN</td><td>実装検証済み</td><td>レビューへ引継ぎ</td><td><div class="path">skills/implementation-nowly/SKILL.md <span class="code">handoff</span></div></td></tr><tr class=""><td>実装検証済み</td><td><a class="chip" href="big-picture.html#n-review" style="background:var(--s-command)" title="コマンド">成果物をレビューして指摘を解消する</a></td><td>指摘を解決し判定を記録</td><td>レビュー解決済み</td><td>実装担当へ戻す</td><td><div class="path">skills/implementation-nowly/SKILL.md <span class="code">handoff</span></div></td></tr><tr class=""><td>レビュー解決済み</td><td><a class="chip" href="big-picture.html#n-release" style="background:var(--s-command)" title="コマンド">許可された変更をマージして既存公開面へ届ける</a></td><td>許可・モデル検査・公開面の検証が揃う</td><td>公開確認済み</td><td>公開結果を記録</td><td><div class="path">skills/implementation-nowly/SKILL.md <span class="code">handoff</span></div></td></tr></tbody></table></div>
+<h3>早見表（状態 × コマンド・イベント）</h3><div class="scroll"><table class="matrix"><thead><tr><th>状態 ＼ コマンド・イベント</th><th><a class="chip" href="big-picture.html#n-plan" style="background:var(--s-command)" title="コマンド">対象を調査して計画を整える</a></th><th><a class="chip" href="big-picture.html#n-implement" style="background:var(--s-command)" title="コマンド">計画を実装して検証する</a></th><th><a class="chip" href="big-picture.html#n-review" style="background:var(--s-command)" title="コマンド">成果物をレビューして指摘を解消する</a></th><th><a class="chip" href="big-picture.html#n-release" style="background:var(--s-command)" title="コマンド">許可された変更をマージして既存公開面へ届ける</a></th></tr></thead><tbody><tr><th scope="row" class="">計画準備中</th><td class="m-ok" title="必要な計画内容と証拠が揃う">→ 実装準備完了<small>（条件あり）</small></td><td class="m-undef">未定義</td><td class="m-undef">未定義</td><td class="m-undef">未定義</td></tr><tr><th scope="row" class="">実装準備完了</th><td class="m-undef">未定義</td><td class="m-ok" title="全タスクと検証がGREEN">→ 実装検証済み<small>（条件あり）</small></td><td class="m-undef">未定義</td><td class="m-undef">未定義</td></tr><tr><th scope="row" class="">実装検証済み</th><td class="m-undef">未定義</td><td class="m-undef">未定義</td><td class="m-ok" title="指摘を解決し判定を記録">→ レビュー解決済み<small>（条件あり）</small></td><td class="m-undef">未定義</td></tr><tr><th scope="row" class="">レビュー解決済み</th><td class="m-undef">未定義</td><td class="m-undef">未定義</td><td class="m-undef">未定義</td><td class="m-ok" title="許可・モデル検査・公開面の検証が揃う">→ 公開確認済み<small>（条件あり）</small></td></tr><tr><th scope="row" class="">公開確認済み</th><td class="m-undef">未定義</td><td class="m-undef">未定義</td><td class="m-undef">未定義</td><td class="m-undef">未定義</td></tr></tbody></table></div>
+<div class="legend mlegend"><span><i class="m-ok"></i>遷移</span><span><i class="m-bad"></i>無効（受け付けない）</span><span><i class="m-skip"></i>無視（受け付けるが変わらない）</span><span><i class="m-undef"></i>未定義（16 マス）</span></div>
+</section>
+<section class="card lc" id="lc-model-life"><h2>モデルと描画の整合性</h2><div class="meta">ドメイン: ドメインモデルと実装設計</div><p class="lede">コードまたは手順で確認できる遷移だけを記載。未定義の状態×契機はホットスポット「evidence-limit」を参照。</p>
+<h3>状態遷移図</h3><div class="zoomable" data-fit="width">
+<div class="zoom-ctrl" role="toolbar" aria-label="拡大縮小"><button type="button" data-z="out" aria-label="縮小">−</button><output aria-live="polite">100%</output><button type="button" data-z="in" aria-label="拡大">＋</button><button type="button" data-z="fit">全体</button><button type="button" data-z="one">等倍</button><button type="button" data-z="full" aria-pressed="false">全画面</button></div>
+<div class="zoom-view diagram" tabindex="0" aria-label="ピンチまたは Ctrl/⌘ + ホイールで拡大縮小、ドラッグで移動"><div class="zoom-content"><svg class="graph" viewBox="0 0 1096 216" width="1096" height="216" role="img" aria-label="モデルと描画の整合性"><defs><marker id="gh-10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 1L10 5L0 9z" class="headfill"/></marker></defs><polyline class="gedge" points="124,166 417.5,166" marker-end="url(#gh-10)"/><rect class="glabel-bg" x="194" y="143" width="142" height="18" rx="3"/><text class="glabel" x="265" y="156" text-anchor="middle">空のモデルを初期化する</text><polyline class="gedge" points="528.5,166 814,166 814,119.7 923,119.7" marker-end="url(#gh-10)"/><rect class="glabel-bg" x="610" y="143" width="194" height="18" rx="3"/><text class="glabel" x="707" y="156" text-anchor="middle">データを検証してHTMLへ描画する</text><polyline class="gedge" points="955,86.7 955,76.7 987,76.7 987,86.7" marker-end="url(#gh-10)"/><rect class="glabel-bg" x="874" y="54.7" width="194" height="18" rx="3"/><text class="glabel" x="971" y="67.7" text-anchor="middle">データを検証してHTMLへ描画する</text><polyline class="gedge" points="923,108.7 550,108.7 550,89.3 521,89.3" marker-end="url(#gh-10)"/><rect class="glabel-bg" x="640" y="85.7" width="134" height="18" rx="3"/><text class="glabel" x="707" y="98.7" text-anchor="middle">HTMLと根拠を照合する</text><polyline class="gedge" points="457,60 457,50 489,50 489,60" marker-end="url(#gh-10)"/><rect class="glabel-bg" x="406" y="28" width="134" height="18" rx="3"/><text class="glabel" x="473" y="41" text-anchor="middle">HTMLと根拠を照合する</text><polyline class="gedge" points="521,74.7 814,74.7 814,97.7 923,97.7" marker-end="url(#gh-10)"/><rect class="glabel-bg" x="610" y="51.7" width="194" height="18" rx="3"/><text class="glabel" x="707" y="64.7" text-anchor="middle">データを検証してHTMLへ描画する</text><rect class="gbox initial" x="28" y="144" width="96" height="44" rx="8"/><text class="gtext" x="76" y="171" text-anchor="middle">未初期化</text><rect class="gbox" x="417.5" y="144" width="111" height="44" rx="8"/><text class="gtext" x="473" y="171" text-anchor="middle">データあり</text><rect class="gbox" x="923" y="86.7" width="96" height="44" rx="8"/><text class="gtext" x="971" y="113.7" text-anchor="middle">描画済み</text><rect class="gbox" x="425" y="60" width="96" height="44" rx="8"/><text class="gtext" x="473" y="87" text-anchor="middle">照合済み</text></svg></div></div>
+</div>
+<h3>遷移表</h3><div class="scroll"><table><thead><tr><th>遷移前</th><th>コマンド・イベント</th><th>条件</th><th>遷移後</th><th>起きること</th><th>証拠</th></tr></thead><tbody><tr class=""><td>未初期化</td><td><a class="chip" href="big-picture.html#n-model-init" style="background:var(--s-command)" title="コマンド">空のモデルを初期化する</a></td><td>不足ファイルがある</td><td>データあり</td><td>雛形を作成</td><td><div class="path">skills/scrum-domain-modeling/SKILL.md <span class="code">event-storming-mcp</span></div></td></tr><tr class=""><td>データあり</td><td><a class="chip" href="big-picture.html#n-model-render" style="background:var(--s-command)" title="コマンド">データを検証してHTMLへ描画する</a></td><td>データ検証が成功</td><td>描画済み</td><td>6ページを書出す</td><td><div class="path">skills/scrum-domain-modeling/SKILL.md <span class="code">event-storming-mcp</span></div></td></tr><tr class=""><td>描画済み</td><td><a class="chip" href="big-picture.html#n-model-render" style="background:var(--s-command)" title="コマンド">データを検証してHTMLへ描画する</a></td><td>データ検証が成功</td><td>描画済み</td><td>再描画する</td><td><div class="path">skills/scrum-domain-modeling/SKILL.md <span class="code">event-storming-mcp</span></div></td></tr><tr class=""><td>描画済み</td><td><a class="chip" href="big-picture.html#n-model-check" style="background:var(--s-command)" title="コマンド">HTMLと根拠を照合する</a></td><td>HTML一致と根拠検査が成功</td><td>照合済み</td><td>終了コード0</td><td><div class="path">skills/scrum-domain-modeling/SKILL.md <span class="code">event-storming-mcp</span></div></td></tr><tr class=""><td>照合済み</td><td><a class="chip" href="big-picture.html#n-model-check" style="background:var(--s-command)" title="コマンド">HTMLと根拠を照合する</a></td><td>同じ条件を満たす</td><td>照合済み</td><td>終了コード0</td><td><div class="path">skills/scrum-domain-modeling/SKILL.md <span class="code">event-storming-mcp</span></div></td></tr><tr class=""><td>照合済み</td><td><a class="chip" href="big-picture.html#n-model-render" style="background:var(--s-command)" title="コマンド">データを検証してHTMLへ描画する</a></td><td>データ検証が成功</td><td>描画済み</td><td>再描画する</td><td><div class="path">skills/scrum-domain-modeling/SKILL.md <span class="code">event-storming-mcp</span></div></td></tr></tbody></table></div>
+<h3>早見表（状態 × コマンド・イベント）</h3><div class="scroll"><table class="matrix"><thead><tr><th>状態 ＼ コマンド・イベント</th><th><a class="chip" href="big-picture.html#n-model-init" style="background:var(--s-command)" title="コマンド">空のモデルを初期化する</a></th><th><a class="chip" href="big-picture.html#n-model-render" style="background:var(--s-command)" title="コマンド">データを検証してHTMLへ描画する</a></th><th><a class="chip" href="big-picture.html#n-model-check" style="background:var(--s-command)" title="コマンド">HTMLと根拠を照合する</a></th></tr></thead><tbody><tr><th scope="row" class="">未初期化</th><td class="m-ok" title="不足ファイルがある">→ データあり<small>（条件あり）</small></td><td class="m-undef">未定義</td><td class="m-undef">未定義</td></tr><tr><th scope="row" class="">データあり</th><td class="m-skip" title="4つのデータファイルが全て存在する場合はそのまま残す。部分欠落時は不足ファイルのみ作成する。">無視<small>4つのデータファイルが全て存在する場合はそのまま残す。部分欠落時は不足ファイルのみ作成する。</small></td><td class="m-ok" title="データ検証が成功">→ 描画済み<small>（条件あり）</small></td><td class="m-undef">未定義</td></tr><tr><th scope="row" class="">描画済み</th><td class="m-skip" title="4つのデータファイルが全て存在する場合はそのまま残す。部分欠落時は不足ファイルのみ作成する。">無視<small>4つのデータファイルが全て存在する場合はそのまま残す。部分欠落時は不足ファイルのみ作成する。</small></td><td class="m-ok" title="データ検証が成功">→ 描画済み<small>（条件あり）</small></td><td class="m-ok" title="HTML一致と根拠検査が成功">→ 照合済み<small>（条件あり）</small></td></tr><tr><th scope="row" class="">照合済み</th><td class="m-skip" title="4つのデータファイルが全て存在する場合はそのまま残す。部分欠落時は不足ファイルのみ作成する。">無視<small>4つのデータファイルが全て存在する場合はそのまま残す。部分欠落時は不足ファイルのみ作成する。</small></td><td class="m-ok" title="データ検証が成功">→ 描画済み<small>（条件あり）</small></td><td class="m-ok" title="同じ条件を満たす">→ 照合済み<small>（条件あり）</small></td></tr></tbody></table></div>
+<div class="legend mlegend"><span><i class="m-ok"></i>遷移</span><span><i class="m-bad"></i>無効（受け付けない）</span><span><i class="m-skip"></i>無視（受け付けるが変わらない）</span><span><i class="m-undef"></i>未定義（3 マス）</span></div>
+</section>
+<section class="card lc" id="lc-quality-life"><h2>品質基盤の導入</h2><div class="meta">ドメイン: React品質基盤</div><p class="lede">コードまたは手順で確認できる遷移だけを記載。未定義の状態×契機はホットスポット「quality-transaction」を参照。</p>
+<h3>状態遷移図</h3><div class="zoomable" data-fit="width">
+<div class="zoom-ctrl" role="toolbar" aria-label="拡大縮小"><button type="button" data-z="out" aria-label="縮小">−</button><output aria-live="polite">100%</output><button type="button" data-z="in" aria-label="拡大">＋</button><button type="button" data-z="fit">全体</button><button type="button" data-z="one">等倍</button><button type="button" data-z="full" aria-pressed="false">全画面</button></div>
+<div class="zoom-view diagram" tabindex="0" aria-label="ピンチまたは Ctrl/⌘ + ホイールで拡大縮小、ドラッグで移動"><div class="zoom-content"><svg class="graph" viewBox="0 0 768 193" width="768" height="193" role="img" aria-label="品質基盤の導入"><defs><marker id="gh-7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 1L10 5L0 9z" class="headfill"/></marker></defs><polyline class="gedge" points="124,142.3 442,142.3 442,96 573,96" marker-end="url(#gh-7)"/><rect class="glabel-bg" x="194" y="119.3" width="238" height="18" rx="3"/><text class="glabel" x="313" y="132.3" text-anchor="middle">対象プロジェクトを調査し導入計画を作る</text><polyline class="gedge" points="605,63 605,53 637,53 637,63" marker-end="url(#gh-7)"/><rect class="glabel-bg" x="502" y="31" width="238" height="18" rx="3"/><text class="glabel" x="621" y="44" text-anchor="middle">対象プロジェクトを調査し導入計画を作る</text><polyline class="gedge" points="573,85 134,85 134,65.7 124,65.7" marker-end="url(#gh-7)"/><rect class="glabel-bg" x="254" y="62" width="118" height="18" rx="3"/><text class="glabel" x="313" y="75" text-anchor="middle">導入計画を適用する</text><polyline class="gedge" points="124,51 442,51 442,74 573,74" marker-end="url(#gh-7)"/><rect class="glabel-bg" x="194" y="28" width="238" height="18" rx="3"/><text class="glabel" x="313" y="41" text-anchor="middle">対象プロジェクトを調査し導入計画を作る</text><rect class="gbox initial" x="28" y="120.3" width="96" height="44" rx="8"/><text class="gtext" x="76" y="147.3" text-anchor="middle">未計画</text><rect class="gbox" x="573" y="63" width="96" height="44" rx="8"/><text class="gtext" x="621" y="90" text-anchor="middle">計画済み</text><rect class="gbox" x="28" y="36.3" width="96" height="44" rx="8"/><text class="gtext" x="76" y="63.3" text-anchor="middle">適用済み</text></svg></div></div>
+</div>
+<h3>遷移表</h3><div class="scroll"><table><thead><tr><th>遷移前</th><th>コマンド・イベント</th><th>条件</th><th>遷移後</th><th>起きること</th><th>証拠</th></tr></thead><tbody><tr class=""><td>未計画</td><td><a class="chip" href="big-picture.html#n-quality-plan" style="background:var(--s-command)" title="コマンド">対象プロジェクトを調査し導入計画を作る</a></td><td>対象調査が成功</td><td>計画済み</td><td>導入差分を整理</td><td><div class="path">skills/react-component-quality/scripts/setup-react-quality.mjs <span class="code">applyQualitySetup</span></div></td></tr><tr class=""><td>計画済み</td><td><a class="chip" href="big-picture.html#n-quality-plan" style="background:var(--s-command)" title="コマンド">対象プロジェクトを調査し導入計画を作る</a></td><td>再調査が成功</td><td>計画済み</td><td>計画を再生成</td><td><div class="path">skills/react-component-quality/scripts/setup-react-quality.mjs <span class="code">applyQualitySetup</span></div></td></tr><tr class=""><td>計画済み</td><td><a class="chip" href="big-picture.html#n-quality-apply" style="background:var(--s-command)" title="コマンド">導入計画を適用する</a></td><td>計画が新鮮で競合がない</td><td>適用済み</td><td>管理ファイルを書出す</td><td><div class="path">skills/react-component-quality/scripts/setup-react-quality.mjs <span class="code">applyQualitySetup</span></div></td></tr><tr class=""><td>適用済み</td><td><a class="chip" href="big-picture.html#n-quality-plan" style="background:var(--s-command)" title="コマンド">対象プロジェクトを調査し導入計画を作る</a></td><td>再調査が成功</td><td>計画済み</td><td>更新差分を整理</td><td><div class="path">skills/react-component-quality/scripts/setup-react-quality.mjs <span class="code">applyQualitySetup</span></div></td></tr></tbody></table></div>
+<h3>早見表（状態 × コマンド・イベント）</h3><div class="scroll"><table class="matrix"><thead><tr><th>状態 ＼ コマンド・イベント</th><th><a class="chip" href="big-picture.html#n-quality-plan" style="background:var(--s-command)" title="コマンド">対象プロジェクトを調査し導入計画を作る</a></th><th><a class="chip" href="big-picture.html#n-quality-apply" style="background:var(--s-command)" title="コマンド">導入計画を適用する</a></th></tr></thead><tbody><tr><th scope="row" class="">未計画</th><td class="m-ok" title="対象調査が成功">→ 計画済み<small>（条件あり）</small></td><td class="m-undef">未定義</td></tr><tr><th scope="row" class="">計画済み</th><td class="m-ok" title="再調査が成功">→ 計画済み<small>（条件あり）</small></td><td class="m-ok" title="計画が新鮮で競合がない">→ 適用済み<small>（条件あり）</small></td></tr><tr><th scope="row" class="">適用済み</th><td class="m-ok" title="再調査が成功">→ 計画済み<small>（条件あり）</small></td><td class="m-undef">未定義</td></tr></tbody></table></div>
+<div class="legend mlegend"><span><i class="m-ok"></i>遷移</span><span><i class="m-bad"></i>無効（受け付けない）</span><span><i class="m-skip"></i>無視（受け付けるが変わらない）</span><span><i class="m-undef"></i>未定義（2 マス）</span></div>
+</section>
+<section class="card lc" id="lc-version-life"><h2>会議中のモデルの版</h2><div class="meta">ドメイン: 会議でのイベントストーミング</div><p class="lede">構造の誤りがある変更は版にならない（断る）。古い版からの書き込みも断り、版は増えない。</p>
+<h3>状態遷移図</h3><div class="zoomable" data-fit="width">
+<div class="zoom-ctrl" role="toolbar" aria-label="拡大縮小"><button type="button" data-z="out" aria-label="縮小">−</button><output aria-live="polite">100%</output><button type="button" data-z="in" aria-label="拡大">＋</button><button type="button" data-z="fit">全体</button><button type="button" data-z="one">等倍</button><button type="button" data-z="full" aria-pressed="false">全画面</button></div>
+<div class="zoom-view diagram" tabindex="0" aria-label="ピンチまたは Ctrl/⌘ + ホイールで拡大縮小、ドラッグで移動"><div class="zoom-content"><svg class="graph" viewBox="0 0 658 256" width="658" height="256" role="img" aria-label="会議中のモデルの版"><defs><marker id="gh-9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 1L10 5L0 9z" class="headfill"/></marker></defs><polyline class="gedge" points="546.1,127.9 546.1,117.9 559.9,117.9 559.9,127.9" marker-end="url(#gh-9)"/><rect class="glabel-bg" x="495.5" y="95.9" width="115" height="18" rx="3"/><text class="glabel" x="553" y="108.9" text-anchor="middle">MCPでモデルを直す</text><polyline class="gedge" points="505,140.4 426,140.4 426,85 202,85 202,195.9 153,195.9" marker-end="url(#gh-9)"/><rect class="glabel-bg" x="271.5" y="62" width="115" height="18" rx="3"/><text class="glabel" x="329" y="75" text-anchor="middle">MCPでモデルを直す</text><polyline class="gedge" points="153,202.1 212,202.1 212,119 416,119 416,146.7 505,146.7" marker-end="url(#gh-9)"/><rect class="glabel-bg" x="271.5" y="96" width="115" height="18" rx="3"/><text class="glabel" x="329" y="109" text-anchor="middle">MCPでモデルを直す</text><polyline class="gedge" points="98.1,183.3 98.1,173.3 111.9,173.3 111.9,183.3" marker-end="url(#gh-9)"/><rect class="glabel-bg" x="47.5" y="151.3" width="115" height="18" rx="3"/><text class="glabel" x="105" y="164.3" text-anchor="middle">MCPでモデルを直す</text><polyline class="gedge" points="532.4,127.9 532.4,85.9 573.6,85.9 573.6,127.9" marker-end="url(#gh-9)"/><rect class="glabel-bg" x="476" y="63.9" width="154" height="18" rx="3"/><text class="glabel" x="553" y="76.9" text-anchor="middle">図の上で付箋と矢印を直す</text><polyline class="gedge" points="505,153 222,153 222,208.4 153,208.4" marker-end="url(#gh-9)"/><rect class="glabel-bg" x="252" y="130" width="154" height="18" rx="3"/><text class="glabel" x="329" y="143" text-anchor="middle">図の上で付箋と矢印を直す</text><polyline class="gedge" points="153,214.7 232,214.7 232,187 416,187 416,159.3 505,159.3" marker-end="url(#gh-9)"/><rect class="glabel-bg" x="252" y="164" width="154" height="18" rx="3"/><text class="glabel" x="329" y="177" text-anchor="middle">図の上で付箋と矢印を直す</text><polyline class="gedge" points="84.4,183.3 84.4,141.3 125.6,141.3 125.6,183.3" marker-end="url(#gh-9)"/><rect class="glabel-bg" x="28" y="119.3" width="154" height="18" rx="3"/><text class="glabel" x="105" y="132.3" text-anchor="middle">図の上で付箋と矢印を直す</text><polyline class="gedge" points="518.7,127.9 518.7,53.9 587.3,53.9 587.3,127.9" marker-end="url(#gh-9)"/><rect class="glabel-bg" x="512" y="31.9" width="82" height="18" rx="3"/><text class="glabel" x="553" y="44.9" text-anchor="middle">前の版に戻す</text><polyline class="gedge" points="505,165.6 426,165.6 426,221 153,221" marker-end="url(#gh-9)"/><rect class="glabel-bg" x="288" y="198" width="82" height="18" rx="3"/><text class="glabel" x="329" y="211" text-anchor="middle">前の版に戻す</text><polyline class="gedge" points="153,189.6 192,189.6 192,51 436,51 436,134.1 505,134.1" marker-end="url(#gh-9)"/><rect class="glabel-bg" x="288" y="28" width="82" height="18" rx="3"/><text class="glabel" x="329" y="41" text-anchor="middle">前の版に戻す</text><polyline class="gedge" points="70.7,183.3 70.7,109.3 139.3,109.3 139.3,183.3" marker-end="url(#gh-9)"/><rect class="glabel-bg" x="64" y="87.3" width="82" height="18" rx="3"/><text class="glabel" x="105" y="100.3" text-anchor="middle">前の版に戻す</text><rect class="gbox initial" x="505" y="127.9" width="96" height="44" rx="8"/><text class="gtext" x="553" y="154.9" text-anchor="middle">検証済み</text><rect class="gbox" x="57" y="183.3" width="96" height="44" rx="8"/><text class="gtext" x="105" y="210.3" text-anchor="middle">書きかけ</text></svg></div></div>
+</div>
+<h3>遷移表</h3><div class="scroll"><table><thead><tr><th>遷移前</th><th>コマンド・イベント</th><th>条件</th><th>遷移後</th><th>起きること</th><th>証拠</th></tr></thead><tbody><tr class=""><td>検証済み</td><td><a class="chip" href="big-picture.html#n-meet-agent" style="background:var(--s-command)" title="コマンド">MCPでモデルを直す</a></td><td>検証が全部通る</td><td>検証済み</td><td>JSONとコミット用HTMLを書く</td><td><div class="path">skills/event-storming-mcp-tips/SKILL.md <span class="code">書きかけ</span></div></td></tr><tr class=""><td>検証済み</td><td><a class="chip" href="big-picture.html#n-meet-agent" style="background:var(--s-command)" title="コマンド">MCPでモデルを直す</a></td><td>構造は正しいが決まりの違反がある</td><td>書きかけ</td><td>JSONだけ書き、図に違反を示す</td><td><div class="path">skills/event-storming-mcp-tips/SKILL.md <span class="code">書きかけ</span></div></td></tr><tr class=""><td>書きかけ</td><td><a class="chip" href="big-picture.html#n-meet-agent" style="background:var(--s-command)" title="コマンド">MCPでモデルを直す</a></td><td>検証が全部通る</td><td>検証済み</td><td>JSONとコミット用HTMLを書く</td><td><div class="path">skills/event-storming-mcp-tips/SKILL.md <span class="code">書きかけ</span></div></td></tr><tr class=""><td>書きかけ</td><td><a class="chip" href="big-picture.html#n-meet-agent" style="background:var(--s-command)" title="コマンド">MCPでモデルを直す</a></td><td>構造は正しいが決まりの違反がある</td><td>書きかけ</td><td>JSONだけ書き、図に違反を示す</td><td><div class="path">skills/event-storming-mcp-tips/SKILL.md <span class="code">書きかけ</span></div></td></tr><tr class=""><td>検証済み</td><td><a class="chip" href="big-picture.html#n-meet-human" style="background:var(--s-command)" title="コマンド">図の上で付箋と矢印を直す</a></td><td>検証が全部通る</td><td>検証済み</td><td>JSONとコミット用HTMLを書く</td><td><div class="path">skills/event-storming-mcp-tips/SKILL.md <span class="code">書きかけ</span></div></td></tr><tr class=""><td>検証済み</td><td><a class="chip" href="big-picture.html#n-meet-human" style="background:var(--s-command)" title="コマンド">図の上で付箋と矢印を直す</a></td><td>構造は正しいが決まりの違反がある</td><td>書きかけ</td><td>JSONだけ書き、図に違反を示す</td><td><div class="path">skills/event-storming-mcp-tips/SKILL.md <span class="code">書きかけ</span></div></td></tr><tr class=""><td>書きかけ</td><td><a class="chip" href="big-picture.html#n-meet-human" style="background:var(--s-command)" title="コマンド">図の上で付箋と矢印を直す</a></td><td>検証が全部通る</td><td>検証済み</td><td>JSONとコミット用HTMLを書く</td><td><div class="path">skills/event-storming-mcp-tips/SKILL.md <span class="code">書きかけ</span></div></td></tr><tr class=""><td>書きかけ</td><td><a class="chip" href="big-picture.html#n-meet-human" style="background:var(--s-command)" title="コマンド">図の上で付箋と矢印を直す</a></td><td>構造は正しいが決まりの違反がある</td><td>書きかけ</td><td>JSONだけ書き、図に違反を示す</td><td><div class="path">skills/event-storming-mcp-tips/SKILL.md <span class="code">書きかけ</span></div></td></tr><tr class=""><td>検証済み</td><td><a class="chip" href="big-picture.html#n-meet-restore" style="background:var(--s-command)" title="コマンド">前の版に戻す</a></td><td>検証が全部通る</td><td>検証済み</td><td>JSONとコミット用HTMLを書く</td><td><div class="path">skills/event-storming-mcp-tips/SKILL.md <span class="code">書きかけ</span></div></td></tr><tr class=""><td>検証済み</td><td><a class="chip" href="big-picture.html#n-meet-restore" style="background:var(--s-command)" title="コマンド">前の版に戻す</a></td><td>構造は正しいが決まりの違反がある</td><td>書きかけ</td><td>JSONだけ書き、図に違反を示す</td><td><div class="path">skills/event-storming-mcp-tips/SKILL.md <span class="code">書きかけ</span></div></td></tr><tr class=""><td>書きかけ</td><td><a class="chip" href="big-picture.html#n-meet-restore" style="background:var(--s-command)" title="コマンド">前の版に戻す</a></td><td>検証が全部通る</td><td>検証済み</td><td>JSONとコミット用HTMLを書く</td><td><div class="path">skills/event-storming-mcp-tips/SKILL.md <span class="code">書きかけ</span></div></td></tr><tr class=""><td>書きかけ</td><td><a class="chip" href="big-picture.html#n-meet-restore" style="background:var(--s-command)" title="コマンド">前の版に戻す</a></td><td>構造は正しいが決まりの違反がある</td><td>書きかけ</td><td>JSONだけ書き、図に違反を示す</td><td><div class="path">skills/event-storming-mcp-tips/SKILL.md <span class="code">書きかけ</span></div></td></tr></tbody></table></div>
+<h3>早見表（状態 × コマンド・イベント）</h3><div class="scroll"><table class="matrix"><thead><tr><th>状態 ＼ コマンド・イベント</th><th><a class="chip" href="big-picture.html#n-meet-agent" style="background:var(--s-command)" title="コマンド">MCPでモデルを直す</a></th><th><a class="chip" href="big-picture.html#n-meet-human" style="background:var(--s-command)" title="コマンド">図の上で付箋と矢印を直す</a></th><th><a class="chip" href="big-picture.html#n-meet-restore" style="background:var(--s-command)" title="コマンド">前の版に戻す</a></th></tr></thead><tbody><tr><th scope="row" class="">検証済み</th><td class="m-ok" title="検証が全部通る / 構造は正しいが決まりの違反がある">→ 検証済み<small>（条件あり）</small><br>→ 書きかけ<small>（条件あり）</small></td><td class="m-ok" title="検証が全部通る / 構造は正しいが決まりの違反がある">→ 検証済み<small>（条件あり）</small><br>→ 書きかけ<small>（条件あり）</small></td><td class="m-ok" title="検証が全部通る / 構造は正しいが決まりの違反がある">→ 検証済み<small>（条件あり）</small><br>→ 書きかけ<small>（条件あり）</small></td></tr><tr><th scope="row" class="">書きかけ</th><td class="m-ok" title="検証が全部通る / 構造は正しいが決まりの違反がある">→ 検証済み<small>（条件あり）</small><br>→ 書きかけ<small>（条件あり）</small></td><td class="m-ok" title="検証が全部通る / 構造は正しいが決まりの違反がある">→ 検証済み<small>（条件あり）</small><br>→ 書きかけ<small>（条件あり）</small></td><td class="m-ok" title="検証が全部通る / 構造は正しいが決まりの違反がある">→ 検証済み<small>（条件あり）</small><br>→ 書きかけ<small>（条件あり）</small></td></tr></tbody></table></div>
+<div class="legend mlegend"><span><i class="m-ok"></i>遷移</span><span><i class="m-bad"></i>無効（受け付けない）</span><span><i class="m-skip"></i>無視（受け付けるが変わらない）</span><span><i class="m-undef"></i>未定義（0 マス）</span></div>
+</section>
+</main>
+
+
+<script>(function(){
+var MIN = 0.1, MAX = 4, PAN_THRESHOLD = 4;
+function canStartPan(e) {
+  if (e.button !== 0 || e.pointerType === 'touch') return false;
+  var t = e.target;
+  if (!t || typeof t.closest !== 'function') return false;
+  return !t.closest('.note, .zoom-ctrl, a, button, input, textarea, select, [contenteditable], [data-no-pan]');
+}
+function panStep(start, x, y, moving, threshold) {
+  var dx = x - start.x, dy = y - start.y;
+  if (!moving && Math.hypot(dx, dy) <= threshold) return { moving: false, left: start.left, top: start.top };
+  return { moving: true, left: start.left - dx, top: start.top - dy };
+}
+function wheelAction(e, v) {
+  if (e.ctrlKey || e.metaKey) return 'zoom';
+  if (!e.deltaY) return 'view';
+  var room = v.scrollHeight - v.clientHeight;
+  if (e.deltaY > 0 ? v.scrollTop < room - 1 : v.scrollTop > 0) return 'view';
+  return 'page';
+}
+function fullscreenAction(st) {
+  if (st.nativeActive) return 'exit-native';
+  if (st.fillActive) return 'exit-fill';
+  return 'enter';
+}
+document.querySelectorAll('.zoomable').forEach(function (box) {
+  var view = box.querySelector('.zoom-view'), content = box.querySelector('.zoom-content'), out = box.querySelector('output');
+  var s = 1, w = content.offsetWidth, h = content.offsetHeight;
+  function clamp(v) { return Math.min(MAX, Math.max(Math.min(MIN, fitAll()), v)); }
+  function fitAll() { return Math.min(view.clientWidth / w, view.clientHeight / h); }
+  function anchor(cx, cy) {
+    var r = view.getBoundingClientRect();
+    if (cx == null) { cx = r.left + view.clientWidth / 2; cy = r.top + view.clientHeight / 2; }
+    var px = cx - r.left, py = cy - r.top;
+    return { px: px, py: py, x: (view.scrollLeft + px) / s, y: (view.scrollTop + py) / s };
+  }
+  // Scale to v, keeping content point a.x/a.y under the screen point a.px/a.py.
+  function set(v, a) {
+    s = clamp(v); content.style.zoom = s; out.textContent = Math.round(s * 100) + '%';
+    if (a) { view.scrollLeft = a.x * s - a.px; view.scrollTop = a.y * s - a.py; }
+    save();
+  }
+  // data-keep: a page that reloads itself (a live diagram) keeps its zoom and position for this path.
+  var keepKey = box.dataset.keep ? 'zoom:' + location.pathname + ':' + Array.prototype.indexOf.call(document.querySelectorAll('.zoomable'), box) : null;
+  function save() { if (keepKey) try { localStorage.setItem(keepKey, JSON.stringify({ s: s, l: view.scrollLeft, t: view.scrollTop })); } catch (e) {} }
+  function kept() { if (!keepKey) return null; try { var k = JSON.parse(localStorage.getItem(keepKey) || 'null'); return k && k.s > 0 ? k : null; } catch (e) { return null; } }
+  view.addEventListener('scroll', save, { passive: true });
+  function zoomAt(v, cx, cy) { set(v, anchor(cx, cy)); }
+  box.querySelector('.zoom-ctrl').addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    var z = b.dataset.z;
+    if (z === 'in') zoomAt(s * 1.25); else if (z === 'out') zoomAt(s / 1.25);
+    else if (z === 'one') zoomAt(1); else if (z === 'fit') { set(fitAll()); view.scrollLeft = 0; view.scrollTop = 0; }
+    else if (z === 'full') toggleFull();
+  });
+  // Full screen keeps the zoom. The browser's full screen first; where it is missing or refused (an embedded
+  // browser), the box fills the tab instead, and Esc leaves it.
+  var fullBtn = box.querySelector('[data-z="full"]');
+  function showFull() {
+    var on = document.fullscreenElement === box || box.classList.contains('zoom-fill');
+    if (fullBtn) { fullBtn.textContent = on ? '戻る' : '全画面'; fullBtn.setAttribute('aria-pressed', on ? 'true' : 'false'); }
+  }
+  function isFull() { return document.fullscreenElement === box || box.classList.contains('zoom-fill'); }
+  function toggleFull() {
+    var a = fullscreenAction({ nativeActive: document.fullscreenElement === box, fillActive: box.classList.contains('zoom-fill') });
+    if (a === 'exit-native') document.exitFullscreen();
+    else if (a === 'exit-fill') { box.classList.remove('zoom-fill'); showFull(); }
+    else {
+      var fill = function () { box.classList.add('zoom-fill'); showFull(); };
+      if (box.requestFullscreen) box.requestFullscreen().catch(fill); else fill();
+    }
+    view.focus();
+  }
+  document.addEventListener('fullscreenchange', showFull);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && box.classList.contains('zoom-fill')) { box.classList.remove('zoom-fill'); showFull(); } });
+  view.addEventListener('keydown', function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    // Typing in a field on the board (a sticky's text editor) is text, not a shortcut.
+    if (e.target && e.target.closest && e.target.closest('input, textarea, select, [contenteditable]')) return;
+    if (e.key === '+' || e.key === '=') zoomAt(s * 1.25); else if (e.key === '-') zoomAt(s / 1.25); else if (e.key === '0') zoomAt(1);
+    else if (e.key === 'f' || e.key === 'F') toggleFull(); else return;
+    e.preventDefault();
+  });
+  // Trackpad pinch in Chrome, Edge and Firefox arrives as wheel + ctrlKey; so does Ctrl/⌘ + wheel.
+  // A plain vertical wheel scrolls the board, or the page once the board cannot move that way.
+  view.addEventListener('wheel', function (e) {
+    var act = wheelAction(e, view);
+    if (act === 'view') return;
+    e.preventDefault();
+    var d = e.deltaMode === 1 ? e.deltaY * 16 : e.deltaY;
+    if (act === 'page') { if (!isFull()) (document.scrollingElement || document.documentElement).scrollBy(0, d); return; }
+    zoomAt(s * Math.exp(-Math.max(-50, Math.min(50, d)) * 0.01), e.clientX, e.clientY);
+  }, { passive: false });
+  // Safari trackpad pinch arrives as gesture events.
+  var touching = false, g = null;
+  view.addEventListener('gesturestart', function (e) { e.preventDefault(); if (!touching) g = { s: s, a: anchor(e.clientX, e.clientY) }; });
+  view.addEventListener('gesturechange', function (e) { e.preventDefault(); if (!touching && g) set(g.s * e.scale, g.a); });
+  view.addEventListener('gestureend', function (e) { e.preventDefault(); g = null; });
+  // Two-finger touch pinch: zoom and pan with the fingers' midpoint.
+  var t = null;
+  function mid(ts) { return { x: (ts[0].clientX + ts[1].clientX) / 2, y: (ts[0].clientY + ts[1].clientY) / 2, d: Math.hypot(ts[0].clientX - ts[1].clientX, ts[0].clientY - ts[1].clientY) || 1 }; }
+  view.addEventListener('touchstart', function (e) {
+    if (e.touches.length !== 2) return;
+    touching = true; var m = mid(e.touches); t = { s: s, d: m.d, a: anchor(m.x, m.y) };
+  }, { passive: true });
+  view.addEventListener('touchmove', function (e) {
+    if (!t || e.touches.length !== 2) return;
+    e.preventDefault();
+    var m = mid(e.touches), r = view.getBoundingClientRect();
+    set(t.s * m.d / t.d, { x: t.a.x, y: t.a.y, px: m.x - r.left, py: m.y - r.top });
+  }, { passive: false });
+  view.addEventListener('touchend', function (e) { if (e.touches.length < 2) { t = null; touching = false; } });
+  view.addEventListener('touchcancel', function () { t = null; touching = false; });
+  // Mouse or pen drag on empty canvas pans. Moves are followed on the whole page (the pointer may leave the
+  // box before it travels far enough), and pointer capture starts only once the press has moved, so a
+  // plain click still reaches what is under it; the click that ends a pan is dropped.
+  var p = null;
+  function movePan(e) {
+    if (!p || e.pointerId !== p.id) return;
+    // Released outside the page before the pan began: no pointerup came, so end it here.
+    if (e.pointerType === 'mouse' && !(e.buttons & 1)) return endPan(e);
+    var n = panStep(p.start, e.clientX, e.clientY, p.moving, PAN_THRESHOLD);
+    if (n.moving && !p.moving) {
+      p.moving = true; view.classList.add('panning'); view.setPointerCapture(e.pointerId);
+      var sel = document.getSelection(); if (sel) sel.removeAllRanges();
+    }
+    if (p.moving) { view.scrollLeft = n.left; view.scrollTop = n.top; }
+  }
+  function endPan(e) {
+    if (!p || e.pointerId !== p.id) return;
+    document.removeEventListener('pointermove', movePan);
+    document.removeEventListener('pointerup', endPan);
+    document.removeEventListener('pointercancel', endPan);
+    if (p.moving) {
+      view.classList.remove('panning');
+      if (view.hasPointerCapture(e.pointerId)) view.releasePointerCapture(e.pointerId);
+      // The click comes in the same task as pointerup, so the guard is dropped right after it; a later
+      // click (from the keyboard, or after a release outside the page that fired none) is never eaten.
+      var drop = function () { document.removeEventListener('click', swallow, true); };
+      var swallow = function (c) { c.stopPropagation(); c.preventDefault(); drop(); };
+      document.addEventListener('click', swallow, true);
+      setTimeout(drop, 0);
+    }
+    p = null;
+  }
+  view.addEventListener('pointerdown', function (e) {
+    if (p || !canStartPan(e)) return;
+    p = { id: e.pointerId, moving: false, start: { x: e.clientX, y: e.clientY, left: view.scrollLeft, top: view.scrollTop } };
+    document.addEventListener('pointermove', movePan);
+    document.addEventListener('pointerup', endPan);
+    document.addEventListener('pointercancel', endPan);
+  });
+  // No text selection while a press on the canvas may become a pan.
+  view.addEventListener('selectstart', function (e) { if (p) e.preventDefault(); });
+  // Start: fit the width (never above 100%) for wide boards; otherwise 100%.
+  var fit = box.dataset.fit, k = kept();
+  if (k) { set(k.s); view.scrollLeft = k.l; view.scrollTop = k.t; }
+  else set(fit === 'width' ? Math.min(1, view.clientWidth / w) : fit === 'all' ? Math.min(1, fitAll()) : 1);
+});
+// Bring a linked sticky into view at the current zoom.
+var target = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+if (target && target.closest('.zoom-view')) target.scrollIntoView({ block: 'center', inline: 'center' });
+})();</script>
+</body>
+</html>

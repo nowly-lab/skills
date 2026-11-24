@@ -1,0 +1,271 @@
+{
+  "schema": "domain-glossary/v1",
+  "title": "業務用語とコード名",
+  "checked": {
+    "revision": "dd7ba79",
+    "date": "2026-11-24"
+  },
+  "terms": [
+    {
+      "term": "計画準備完了",
+      "meaning": "実装を開始するための計画内容と実行証拠が揃った状態",
+      "code": [
+        "planning",
+        "ready"
+      ],
+      "nodes": [
+        "plan"
+      ],
+      "evidence": [
+        {
+          "path": "skills/planning-nowly/SKILL.md",
+          "symbol": "ready",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "term": "所有者記録",
+      "meaning": "計画・判定・検証を引き継ぐ担当者の記録",
+      "code": [
+        "owner record"
+      ],
+      "nodes": [
+        "implement"
+      ],
+      "evidence": [
+        {
+          "path": "skills/implementation-nowly/SKILL.md",
+          "symbol": "owner record",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "term": "独立レビュー",
+      "meaning": "計画・実装をしていない担当によるレビュー",
+      "code": [
+        "independent review"
+      ],
+      "nodes": [
+        "review"
+      ],
+      "evidence": [
+        {
+          "path": "skills/review-nowly/SKILL.md",
+          "symbol": "Independent review",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "term": "単独所有者経路",
+      "meaning": "修正や小規模変更を同じ所有者が実装し新しい文脈でレビューする経路",
+      "code": [
+        "single-owner"
+      ],
+      "nodes": [
+        "review"
+      ],
+      "evidence": [
+        {
+          "path": "skills/review-nowly/SKILL.md",
+          "symbol": "Single-owner",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "term": "モデルの根拠",
+      "meaning": "リポジトリ相対パスと実在する文字列で追跡する出典",
+      "code": [
+        "event-storming-mcp check"
+      ],
+      "nodes": [
+        "model-check"
+      ],
+      "evidence": [
+        {
+          "path": "skills/scrum-domain-modeling/SKILL.md",
+          "symbol": "event-storming-mcp check",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "term": "ドメインモデル",
+      "meaning": "4つのJSONを正とする業務全体像",
+      "code": [
+        "event-storming-mcp render"
+      ],
+      "nodes": [
+        "model-render"
+      ],
+      "evidence": [
+        {
+          "path": "skills/scrum-domain-modeling/SKILL.md",
+          "symbol": "event-storming-mcp render",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "term": "実装用モデル",
+      "meaning": "状態・依存・エラー・永続化境界を具体化する技術契約",
+      "code": [
+        "DMMF"
+      ],
+      "nodes": [
+        "dmmf"
+      ],
+      "evidence": [
+        {
+          "path": "skills/dmmf-implementation/SKILL.md",
+          "symbol": "DMMF",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "term": "公開完了",
+      "meaning": "対象の公開成果物を読戻して検証した結果",
+      "code": [
+        "read back"
+      ],
+      "nodes": [
+        "release"
+      ],
+      "evidence": [
+        {
+          "path": "skills/implementation-nowly/references/main-release-policy.md",
+          "symbol": "read back",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "term": "登録対象の許可リスト",
+      "meaning": "一括更新の対象を限定する製品名の集合",
+      "code": [
+        "allowlist"
+      ],
+      "nodes": [
+        "pull-main"
+      ],
+      "evidence": [
+        {
+          "path": "skills/orca-pull-all-main/SKILL.md",
+          "symbol": "allowlist",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "term": "品質導入計画",
+      "meaning": "管理対象ファイルの作成・更新・競合を含む適用前計画",
+      "code": [
+        "planQualitySetup"
+      ],
+      "nodes": [
+        "quality-plan"
+      ],
+      "evidence": [
+        {
+          "path": "skills/react-component-quality/scripts/setup-react-quality.mjs",
+          "symbol": "planQualitySetup",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "term": "品質適用",
+      "meaning": "計画の鮮度を確認してファイルを更新する処理",
+      "code": [
+        "applyQualitySetup"
+      ],
+      "nodes": [
+        "quality-apply"
+      ],
+      "evidence": [
+        {
+          "path": "skills/react-component-quality/scripts/setup-react-quality.mjs",
+          "symbol": "applyQualitySetup",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "term": "会議ボード",
+      "meaning": "event-storming-mcp のサーバーが映す生きた全体像。モデルが変わると開いている画面がすぐ描き直される",
+      "code": [
+        "open_page"
+      ],
+      "nodes": [
+        "meet-open-done",
+        "meet-view"
+      ],
+      "evidence": [
+        {
+          "path": "skills/event-storming-mcp-tips/SKILL.md",
+          "symbol": "open_page",
+          "role": "ui"
+        }
+      ]
+    },
+    {
+      "term": "登録プロジェクト",
+      "meaning": "リポジトリとその中のモデルフォルダの組。作業場所が複数あっても1つ",
+      "code": [
+        "register_project",
+        "watched-repos.json"
+      ],
+      "nodes": [
+        "meet-open"
+      ],
+      "evidence": [
+        {
+          "path": "skills/event-storming-mcp-tips/SKILL.md",
+          "symbol": "register_project",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "term": "モデルの版",
+      "meaning": "MCP・画面・ファイルの直接編集のたびに増える版番号と、その時点のデータの写し。古い版からの書き込みは断る",
+      "code": [
+        "apply_changes",
+        "history.jsonl"
+      ],
+      "nodes": [
+        "meet-agent",
+        "meet-human",
+        "meet-restore"
+      ],
+      "evidence": [
+        {
+          "path": "skills/event-storming-mcp-tips/SKILL.md",
+          "symbol": "history.jsonl",
+          "role": "persistence"
+        }
+      ]
+    },
+    {
+      "term": "書きかけの版",
+      "meaning": "構造は正しいがモデルの決まりに違反している版。保存して図に赤く示し、コミット用HTMLは書かない",
+      "code": [
+        "書きかけ"
+      ],
+      "nodes": [
+        "meet-draft"
+      ],
+      "evidence": [
+        {
+          "path": "skills/event-storming-mcp-tips/SKILL.md",
+          "symbol": "書きかけ",
+          "role": "source"
+        }
+      ]
+    }
+  ]
+}

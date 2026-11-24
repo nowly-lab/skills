@@ -1,0 +1,201 @@
+{
+  "schema": "context-map/v1",
+  "title": "責務と契約の境界",
+  "checked": {
+    "revision": "dd7ba79",
+    "date": "2026-11-24"
+  },
+  "summary": "独立したデプロイ単位ではなく、nowly-lab/skills の公開スキル・CLI と、それが呼ぶ nowly-lab/mcp のツールの責務境界。各プロジェクトのアプリや実運用の設定・秘密情報はこのリポジトリに含まれない。",
+  "contexts": [
+    {
+      "id": "delivery",
+      "name": "計画・実装・レビュー",
+      "tech": "Markdown の手順とローカル CLI",
+      "responsibility": "計画・実装・レビューの規則と結果を管理する",
+      "owns": [
+        "所有者記録",
+        "HTML計画",
+        "レビュー判定",
+        "画面比較の結果"
+      ],
+      "contract": [
+        "planning-nowly → implementation-nowly → review-nowly",
+        "計画の ready と検証結果を引き継ぐ"
+      ],
+      "domains": [
+        "delivery"
+      ],
+      "evidence": [
+        {
+          "path": "skills/planning-nowly/SKILL.md",
+          "symbol": "planning",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "model",
+      "name": "ドメインモデルと実装設計",
+      "tech": "スキルの手順と npx で呼ぶ公開ツール",
+      "responsibility": "ドメインモデルと実装設計の規則と結果を管理する",
+      "owns": [
+        "4種類のJSON",
+        "生成HTML 6ページ"
+      ],
+      "contract": [
+        "init / validate / render / check --repo",
+        "JSON v1 と根拠ファイル・文字列"
+      ],
+      "domains": [
+        "model"
+      ],
+      "evidence": [
+        {
+          "path": "skills/scrum-domain-modeling/SKILL.md",
+          "symbol": "event-storming-mcp",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "release",
+      "name": "公開と登録リポジトリの同期",
+      "tech": "Markdown の手順とローカル CLI",
+      "responsibility": "公開と登録リポジトリの同期の規則と結果を管理する",
+      "owns": [
+        "製品別の公開結果",
+        "更新・除外・失敗の報告"
+      ],
+      "contract": [
+        "許可されたmainマージと公開対象の照合",
+        "push-onlyはコミットやブランチ切替をしない"
+      ],
+      "domains": [
+        "release"
+      ],
+      "evidence": [
+        {
+          "path": "skills/implementation-nowly/references/main-release-policy.md",
+          "symbol": "main",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "quality",
+      "name": "React品質基盤",
+      "tech": "ローカルスクリプト",
+      "responsibility": "React品質基盤の規則と結果を管理する",
+      "owns": [
+        "導入計画",
+        "管理対象ファイルと基準値"
+      ],
+      "contract": [
+        "計画→適用→検証",
+        "管理ファイルの競合と計画鮮度を確認"
+      ],
+      "domains": [
+        "quality"
+      ],
+      "evidence": [
+        {
+          "path": "skills/react-component-quality/scripts/setup-react-quality.mjs",
+          "symbol": "planQualitySetup",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "esm",
+      "name": "event-storming-mcp（nowly-lab/mcp のツール）",
+      "tech": "Node 22.18+・TypeScript・npx -y -p github:nowly-lab/mcp event-storming-mcp",
+      "responsibility": "ドメインモデルの検証・描画・照合と、会議で全員が見る生きた全体像・MCP・画面での手直し・履歴を受け持つ",
+      "owns": [
+        "描画と検証のコード",
+        "会議サーバー",
+        "登録プロジェクトと版の履歴（~/.event-storming-mcp）"
+      ],
+      "contract": [
+        "init / validate / render / check --repo（いまと同じ出力と終了コード）",
+        "MCP: list_projects / register_project / get_model / find_nodes / apply_changes / validate / list_history / get_version / restore_version / open_page"
+      ],
+      "guarantees": [
+        "127.0.0.1 だけで待ち受ける",
+        "古い版からの書き込みは断る"
+      ],
+      "domains": [
+        "model",
+        "meeting"
+      ],
+      "evidence": [
+        {
+          "path": "skills/event-storming-mcp-tips/SKILL.md",
+          "symbol": "event-storming-mcp",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "project-side",
+      "name": "プロジェクトの tips・秘密情報の運用（各プロジェクト側）",
+      "tech": "各プロジェクトの AGENTS.md / CLAUDE.md、非公開の <product>-tips スキル",
+      "responsibility": "製品ごとの構造・コマンド・公開先・秘密情報の扱いを受け持つ。このリポジトリには含めない",
+      "owns": [
+        "製品固有の手順と制約",
+        "公開先と資格情報"
+      ],
+      "contract": [
+        "スキルは手順の中で各プロジェクトの tips を読む",
+        "実装の根拠は対象製品で再確認する"
+      ],
+      "changed": true,
+      "evidence": [
+        {
+          "path": "README.md",
+          "symbol": "Product-specific knowledge",
+          "role": "source"
+        }
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "from": "delivery",
+      "to": "model",
+      "label": "計画時の更新とPR前の check --repo"
+    },
+    {
+      "from": "delivery",
+      "to": "project-side",
+      "label": "対象製品の手順を参照",
+      "changed": true
+    },
+    {
+      "from": "delivery",
+      "to": "quality",
+      "label": "品質チェックと構造の整備"
+    },
+    {
+      "from": "delivery",
+      "to": "release",
+      "label": "解決済みレビューと公開許可"
+    },
+    {
+      "from": "release",
+      "to": "project-side",
+      "label": "既存の資格情報と運用対象を確認",
+      "changed": true
+    },
+    {
+      "from": "project-side",
+      "to": "delivery",
+      "label": "エラー通知などから計画を始める",
+      "changed": true
+    },
+    {
+      "from": "model",
+      "to": "esm",
+      "label": "npx で render・check を呼び、会議ではサーバーで見せて直す"
+    }
+  ]
+}

@@ -1,0 +1,1909 @@
+{
+  "schema": "big-picture/v1",
+  "title": "nowly-lab/skills の開発の流れ（全体像）",
+  "checked": {
+    "revision": "dd7ba79",
+    "date": "2026-11-24"
+  },
+  "product": "nowly-lab/skills",
+  "summary": "nowly-lab/skills の公開スキルが定める、人とエージェントの開発の流れ（計画・実装・レビュー・公開、ドメインモデル、会議でのイベントストーミング、React 品質基盤）を示す。イベントは業務上の完了事実を表し、イベントバスや永続イベントの実装を意味しない。各プロジェクト固有の手順・公開先・秘密情報は各プロジェクト側にあり、このモデルには含めない。",
+  "domains": [
+    {
+      "id": "delivery",
+      "name": "計画・実装・レビュー"
+    },
+    {
+      "id": "model",
+      "name": "ドメインモデルと実装設計"
+    },
+    {
+      "id": "meeting",
+      "name": "会議でのイベントストーミング",
+      "note": "event-storming-mcp のサーバーで全員が同じ図を見て、エージェントと人が直す。"
+    },
+    {
+      "id": "release",
+      "name": "公開と登録リポジトリの同期"
+    },
+    {
+      "id": "quality",
+      "name": "React品質基盤"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "plan-actor",
+      "type": "actor",
+      "domain": "delivery",
+      "text": "依頼者と計画担当",
+      "evidence": [
+        {
+          "path": "skills/planning-nowly/SKILL.md",
+          "symbol": "planning",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "plan",
+      "type": "command",
+      "domain": "delivery",
+      "text": "対象を調査して計画を整える",
+      "evidence": [
+        {
+          "path": "skills/planning-nowly/SKILL.md",
+          "symbol": "planning",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "plan-done",
+      "type": "event",
+      "domain": "delivery",
+      "text": "計画と引継ぎ条件を整えた",
+      "evidence": [
+        {
+          "path": "skills/planning-nowly/SKILL.md",
+          "symbol": "planning",
+          "role": "source"
+        }
+      ],
+      "phase": "plan"
+    },
+    {
+      "id": "plan-rule",
+      "type": "aggregate",
+      "domain": "delivery",
+      "text": "計画",
+      "invariants": [
+        "対象・根拠・検証内容が揃ってから ready にする"
+      ],
+      "evidence": [
+        {
+          "path": "skills/planning-nowly/SKILL.md",
+          "symbol": "planning",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "plan-view",
+      "type": "readModel",
+      "domain": "delivery",
+      "text": "HTML計画と所有者記録",
+      "evidence": [
+        {
+          "path": "skills/planning-nowly/SKILL.md",
+          "symbol": "planning",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "plan-external",
+      "type": "external",
+      "domain": "delivery",
+      "text": "Orca・Plannotator Inbox",
+      "attach": {
+        "to": "plan",
+        "pos": "below"
+      },
+      "evidence": [
+        {
+          "path": "skills/planning-nowly/SKILL.md",
+          "symbol": "planning",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "implement-actor",
+      "type": "actor",
+      "domain": "delivery",
+      "text": "実装担当",
+      "evidence": [
+        {
+          "path": "skills/implementation-nowly/SKILL.md",
+          "symbol": "GREEN",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "implement",
+      "type": "command",
+      "domain": "delivery",
+      "text": "計画を実装して検証する",
+      "evidence": [
+        {
+          "path": "skills/implementation-nowly/SKILL.md",
+          "symbol": "GREEN",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "implement-done",
+      "type": "event",
+      "domain": "delivery",
+      "text": "計画の検証結果を記録した",
+      "evidence": [
+        {
+          "path": "skills/implementation-nowly/SKILL.md",
+          "symbol": "GREEN",
+          "role": "source"
+        }
+      ],
+      "phase": "implement"
+    },
+    {
+      "id": "implement-rule",
+      "type": "aggregate",
+      "domain": "delivery",
+      "text": "実装記録",
+      "invariants": [
+        "ready な計画から実装し、変更と検証を所有者記録に残す"
+      ],
+      "evidence": [
+        {
+          "path": "skills/implementation-nowly/SKILL.md",
+          "symbol": "GREEN",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "implement-view",
+      "type": "readModel",
+      "domain": "delivery",
+      "text": "検証結果と計画との差分",
+      "evidence": [
+        {
+          "path": "skills/implementation-nowly/SKILL.md",
+          "symbol": "GREEN",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "review-actor",
+      "type": "actor",
+      "domain": "delivery",
+      "text": "レビュー担当",
+      "evidence": [
+        {
+          "path": "skills/review-nowly/SKILL.md",
+          "symbol": "Verdict",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "review",
+      "type": "command",
+      "domain": "delivery",
+      "text": "成果物をレビューして指摘を解消する",
+      "evidence": [
+        {
+          "path": "skills/review-nowly/SKILL.md",
+          "symbol": "Verdict",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "review-done",
+      "type": "event",
+      "domain": "delivery",
+      "text": "レビュー判定を記録した",
+      "evidence": [
+        {
+          "path": "skills/review-nowly/SKILL.md",
+          "symbol": "Verdict",
+          "role": "source"
+        }
+      ],
+      "phase": "review"
+    },
+    {
+      "id": "review-rule",
+      "type": "aggregate",
+      "domain": "delivery",
+      "text": "レビュー判定",
+      "invariants": [
+        "経路に応じた新しい文脈または独立レビューを行う"
+      ],
+      "evidence": [
+        {
+          "path": "skills/review-nowly/SKILL.md",
+          "symbol": "Verdict",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "review-view",
+      "type": "readModel",
+      "domain": "delivery",
+      "text": "指摘・再レビュー・残る制約",
+      "evidence": [
+        {
+          "path": "skills/review-nowly/SKILL.md",
+          "symbol": "Verdict",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "plan-handoff",
+      "type": "policy",
+      "domain": "delivery",
+      "text": "計画が整ったら",
+      "execution": "external",
+      "evidence": [
+        {
+          "path": "skills/planning-nowly/SKILL.md",
+          "symbol": "Execution handoff",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "review-handoff",
+      "type": "policy",
+      "domain": "delivery",
+      "text": "検証が通ったら",
+      "execution": "external",
+      "evidence": [
+        {
+          "path": "skills/implementation-nowly/SKILL.md",
+          "symbol": "Review handoff",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "procedural-states",
+      "type": "hotspot",
+      "domain": "delivery",
+      "text": "手順の ready／GREEN／判定は所有者が記録する。全状態の再開・差戻しを強制する実行エンジンはなく、ライフサイクル表の未定義セルは手順外の組合せ。",
+      "attach": {
+        "to": "plan",
+        "pos": "below"
+      },
+      "evidence": [
+        {
+          "path": "skills/planning-nowly/SKILL.md",
+          "symbol": "owner record",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "model-init-actor",
+      "type": "actor",
+      "domain": "model",
+      "text": "モデル作成担当",
+      "evidence": [
+        {
+          "path": "skills/scrum-domain-modeling/SKILL.md",
+          "symbol": "event-storming-mcp init",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "model-init",
+      "type": "command",
+      "domain": "model",
+      "text": "空のモデルを初期化する",
+      "evidence": [
+        {
+          "path": "skills/scrum-domain-modeling/SKILL.md",
+          "symbol": "event-storming-mcp init",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "model-init-done",
+      "type": "event",
+      "domain": "model",
+      "text": "不足するデータファイルを作成した",
+      "evidence": [
+        {
+          "path": "skills/scrum-domain-modeling/SKILL.md",
+          "symbol": "event-storming-mcp init",
+          "role": "source"
+        }
+      ],
+      "phase": "prepare"
+    },
+    {
+      "id": "model-init-rule",
+      "type": "aggregate",
+      "domain": "model",
+      "text": "モデルのデータファイル",
+      "invariants": [
+        "既存ファイルは上書きしない"
+      ],
+      "evidence": [
+        {
+          "path": "skills/scrum-domain-modeling/SKILL.md",
+          "symbol": "event-storming-mcp init",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "model-render-actor",
+      "type": "actor",
+      "domain": "model",
+      "text": "モデル作成担当",
+      "evidence": [
+        {
+          "path": "skills/scrum-domain-modeling/SKILL.md",
+          "symbol": "event-storming-mcp render",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "model-render",
+      "type": "command",
+      "domain": "model",
+      "text": "データを検証してHTMLへ描画する",
+      "evidence": [
+        {
+          "path": "skills/scrum-domain-modeling/SKILL.md",
+          "symbol": "event-storming-mcp render",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "model-render-done",
+      "type": "event",
+      "domain": "model",
+      "text": "モデルのHTMLを生成した",
+      "evidence": [
+        {
+          "path": "skills/scrum-domain-modeling/SKILL.md",
+          "symbol": "event-storming-mcp render",
+          "role": "source"
+        }
+      ],
+      "phase": "design"
+    },
+    {
+      "id": "model-render-rule",
+      "type": "aggregate",
+      "domain": "model",
+      "text": "モデルのページ",
+      "invariants": [
+        "データに問題があれば書き出さない"
+      ],
+      "evidence": [
+        {
+          "path": "skills/scrum-domain-modeling/SKILL.md",
+          "symbol": "event-storming-mcp render",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "model-render-view",
+      "type": "readModel",
+      "domain": "model",
+      "text": "全体像・用語集・イベントとコマンド・状態・境界",
+      "evidence": [
+        {
+          "path": "skills/scrum-domain-modeling/SKILL.md",
+          "symbol": "event-storming-mcp render",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "model-check-actor",
+      "type": "actor",
+      "domain": "model",
+      "text": "実装担当",
+      "evidence": [
+        {
+          "path": "skills/scrum-domain-modeling/SKILL.md",
+          "symbol": "event-storming-mcp check",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "model-check",
+      "type": "command",
+      "domain": "model",
+      "text": "HTMLと根拠を照合する",
+      "evidence": [
+        {
+          "path": "skills/scrum-domain-modeling/SKILL.md",
+          "symbol": "event-storming-mcp check",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "model-check-done",
+      "type": "event",
+      "domain": "model",
+      "text": "モデルの整合性を確認した",
+      "evidence": [
+        {
+          "path": "skills/scrum-domain-modeling/SKILL.md",
+          "symbol": "event-storming-mcp check",
+          "role": "source"
+        }
+      ],
+      "phase": "design"
+    },
+    {
+      "id": "model-check-rule",
+      "type": "aggregate",
+      "domain": "model",
+      "text": "モデルの照合結果",
+      "invariants": [
+        "HTML一致と根拠パス・名前を確認する"
+      ],
+      "evidence": [
+        {
+          "path": "skills/scrum-domain-modeling/SKILL.md",
+          "symbol": "event-storming-mcp check",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "model-check-view",
+      "type": "readModel",
+      "domain": "model",
+      "text": "検証結果と修正箇所",
+      "evidence": [
+        {
+          "path": "skills/scrum-domain-modeling/SKILL.md",
+          "symbol": "event-storming-mcp check",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "dmmf-actor",
+      "type": "actor",
+      "domain": "model",
+      "text": "実装設計担当",
+      "evidence": [
+        {
+          "path": "skills/dmmf-implementation/SKILL.md",
+          "symbol": "Core Workflow",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "dmmf",
+      "type": "command",
+      "domain": "model",
+      "text": "モデルを型・境界・依存の設計へ具体化する",
+      "evidence": [
+        {
+          "path": "skills/dmmf-implementation/SKILL.md",
+          "symbol": "Core Workflow",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "dmmf-done",
+      "type": "event",
+      "domain": "model",
+      "text": "実装用の技術設計を整理した",
+      "evidence": [
+        {
+          "path": "skills/dmmf-implementation/SKILL.md",
+          "symbol": "Core Workflow",
+          "role": "source"
+        }
+      ],
+      "phase": "design"
+    },
+    {
+      "id": "dmmf-view",
+      "type": "readModel",
+      "domain": "model",
+      "text": "ワークフロー・エラー・境界・テスト設計",
+      "evidence": [
+        {
+          "path": "skills/dmmf-implementation/SKILL.md",
+          "symbol": "Core Workflow",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "evidence-limit",
+      "type": "hotspot",
+      "domain": "model",
+      "text": "根拠検査はファイル内の文字列存在まで。規則の意味・実行時の正しさや最新の外部環境を証明しない。",
+      "attach": {
+        "to": "model-check",
+        "pos": "below"
+      },
+      "evidence": [
+        {
+          "path": "skills/scrum-domain-modeling/SKILL.md",
+          "symbol": "check --repo",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "release-actor",
+      "type": "actor",
+      "domain": "release",
+      "text": "公開担当",
+      "evidence": [
+        {
+          "path": "skills/implementation-nowly/references/main-release-policy.md",
+          "symbol": "read back",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "release",
+      "type": "command",
+      "domain": "release",
+      "text": "許可された変更をマージして既存公開面へ届ける",
+      "evidence": [
+        {
+          "path": "skills/implementation-nowly/references/main-release-policy.md",
+          "symbol": "read back",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "release-done",
+      "type": "event",
+      "domain": "release",
+      "text": "公開先の成果物を照合した",
+      "evidence": [
+        {
+          "path": "skills/implementation-nowly/references/main-release-policy.md",
+          "symbol": "read back",
+          "role": "source"
+        }
+      ],
+      "phase": "handoff"
+    },
+    {
+      "id": "release-rule",
+      "type": "aggregate",
+      "domain": "release",
+      "text": "公開先の成果物",
+      "invariants": [
+        "ビルド・アップロード・公開を区別し、未完了面を成功扱いしない"
+      ],
+      "evidence": [
+        {
+          "path": "skills/implementation-nowly/references/main-release-policy.md",
+          "symbol": "read back",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "release-external",
+      "type": "external",
+      "domain": "release",
+      "text": "GitHub・製品ごとの配布基盤",
+      "attach": {
+        "to": "release",
+        "pos": "below"
+      },
+      "evidence": [
+        {
+          "path": "skills/implementation-nowly/references/main-release-policy.md",
+          "symbol": "read back",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "release-handoff",
+      "type": "policy",
+      "domain": "release",
+      "text": "レビューが済み、モデル検査が通ったら",
+      "execution": "external",
+      "note": "公開は許可された範囲で行う（旧表記: レビュー後にモデル検査を通し、許可された範囲で公開する）。",
+      "evidence": [
+        {
+          "path": "skills/implementation-nowly/SKILL.md",
+          "symbol": "PR and release",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "pull-main-actor",
+      "type": "actor",
+      "domain": "release",
+      "text": "運用担当",
+      "evidence": [
+        {
+          "path": "skills/orca-pull-all-main/SKILL.md",
+          "symbol": "ff-only",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "pull-main",
+      "type": "command",
+      "domain": "release",
+      "text": "登録済み対象のmainを更新する",
+      "evidence": [
+        {
+          "path": "skills/orca-pull-all-main/SKILL.md",
+          "symbol": "ff-only",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "pull-main-done",
+      "type": "event",
+      "domain": "release",
+      "text": "対象ごとの更新結果を確認した",
+      "evidence": [
+        {
+          "path": "skills/orca-pull-all-main/SKILL.md",
+          "symbol": "ff-only",
+          "role": "source"
+        }
+      ],
+      "phase": "handoff"
+    },
+    {
+      "id": "pull-main-rule",
+      "type": "aggregate",
+      "domain": "release",
+      "text": "対象リポジトリのmain",
+      "invariants": [
+        "許可リスト・cleanなmain・正しいoriginを確認し早送りのみ"
+      ],
+      "evidence": [
+        {
+          "path": "skills/orca-pull-all-main/SKILL.md",
+          "symbol": "ff-only",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "pull-main-external",
+      "type": "external",
+      "domain": "release",
+      "text": "Orca登録一覧・Git origin",
+      "attach": {
+        "to": "pull-main",
+        "pos": "below"
+      },
+      "evidence": [
+        {
+          "path": "skills/orca-pull-all-main/SKILL.md",
+          "symbol": "ff-only",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "push-main-actor",
+      "type": "actor",
+      "domain": "release",
+      "text": "運用担当",
+      "evidence": [
+        {
+          "path": "skills/orca-push-all-main/SKILL.md",
+          "symbol": "Never commit",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "push-main",
+      "type": "command",
+      "domain": "release",
+      "text": "登録済み対象のmainを送信する",
+      "evidence": [
+        {
+          "path": "skills/orca-push-all-main/SKILL.md",
+          "symbol": "Never commit",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "push-main-done",
+      "type": "event",
+      "domain": "release",
+      "text": "対象ごとの送信結果を確認した",
+      "evidence": [
+        {
+          "path": "skills/orca-push-all-main/SKILL.md",
+          "symbol": "Never commit",
+          "role": "source"
+        }
+      ],
+      "phase": "handoff"
+    },
+    {
+      "id": "push-main-rule",
+      "type": "aggregate",
+      "domain": "release",
+      "text": "対象リポジトリのmain",
+      "invariants": [
+        "無関係の変更を含めずコミット・切替・強制pushを行わない"
+      ],
+      "evidence": [
+        {
+          "path": "skills/orca-push-all-main/SKILL.md",
+          "symbol": "Never commit",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "release-scope",
+      "type": "hotspot",
+      "domain": "release",
+      "text": "対象製品の公開先と資格情報は各プロジェクト側と外部環境にある。スキルの手順は公開の進め方を定めるだけで、公開の完了は証明しない。",
+      "attach": {
+        "to": "release",
+        "pos": "below"
+      },
+      "evidence": [
+        {
+          "path": "skills/implementation-nowly/references/main-release-policy.md",
+          "symbol": "read back",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "quality-plan-actor",
+      "type": "actor",
+      "domain": "quality",
+      "text": "品質整備担当",
+      "evidence": [
+        {
+          "path": "skills/react-component-quality/scripts/setup-react-quality.mjs",
+          "symbol": "planQualitySetup",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "quality-plan",
+      "type": "command",
+      "domain": "quality",
+      "text": "対象プロジェクトを調査し導入計画を作る",
+      "evidence": [
+        {
+          "path": "skills/react-component-quality/scripts/setup-react-quality.mjs",
+          "symbol": "planQualitySetup",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "quality-plan-done",
+      "type": "event",
+      "domain": "quality",
+      "text": "品質基盤の導入差分を整理した",
+      "evidence": [
+        {
+          "path": "skills/react-component-quality/scripts/setup-react-quality.mjs",
+          "symbol": "planQualitySetup",
+          "role": "source"
+        }
+      ],
+      "phase": "plan"
+    },
+    {
+      "id": "quality-plan-view",
+      "type": "readModel",
+      "domain": "quality",
+      "text": "作成・更新・競合の一覧",
+      "evidence": [
+        {
+          "path": "skills/react-component-quality/scripts/setup-react-quality.mjs",
+          "symbol": "planQualitySetup",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "quality-apply-actor",
+      "type": "actor",
+      "domain": "quality",
+      "text": "品質整備担当",
+      "evidence": [
+        {
+          "path": "skills/react-component-quality/scripts/setup-react-quality.mjs",
+          "symbol": "applyQualitySetup",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "quality-apply",
+      "type": "command",
+      "domain": "quality",
+      "text": "導入計画を適用する",
+      "evidence": [
+        {
+          "path": "skills/react-component-quality/scripts/setup-react-quality.mjs",
+          "symbol": "applyQualitySetup",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "quality-apply-done",
+      "type": "event",
+      "domain": "quality",
+      "text": "品質設定の適用結果を返した",
+      "evidence": [
+        {
+          "path": "skills/react-component-quality/scripts/setup-react-quality.mjs",
+          "symbol": "applyQualitySetup",
+          "role": "source"
+        }
+      ],
+      "phase": "implement"
+    },
+    {
+      "id": "quality-apply-rule",
+      "type": "aggregate",
+      "domain": "quality",
+      "text": "品質設定",
+      "invariants": [
+        "古い計画や競合を拒否し、失敗時はロールバックする"
+      ],
+      "evidence": [
+        {
+          "path": "skills/react-component-quality/scripts/setup-react-quality.mjs",
+          "symbol": "applyQualitySetup",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "quality-audit-actor",
+      "type": "actor",
+      "domain": "quality",
+      "text": "品質整備担当",
+      "evidence": [
+        {
+          "path": "skills/react-component-quality/scripts/audit-react-quality.mjs",
+          "symbol": "auditReactQuality",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "quality-audit",
+      "type": "command",
+      "domain": "quality",
+      "text": "React構造を監査する",
+      "evidence": [
+        {
+          "path": "skills/react-component-quality/scripts/audit-react-quality.mjs",
+          "symbol": "auditReactQuality",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "quality-audit-done",
+      "type": "event",
+      "domain": "quality",
+      "text": "監査結果を生成した",
+      "evidence": [
+        {
+          "path": "skills/react-component-quality/scripts/audit-react-quality.mjs",
+          "symbol": "auditReactQuality",
+          "role": "source"
+        }
+      ],
+      "phase": "implement"
+    },
+    {
+      "id": "quality-audit-view",
+      "type": "readModel",
+      "domain": "quality",
+      "text": "コンポーネント品質の指摘",
+      "evidence": [
+        {
+          "path": "skills/react-component-quality/scripts/audit-react-quality.mjs",
+          "symbol": "auditReactQuality",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "quality-scaffold-actor",
+      "type": "actor",
+      "domain": "quality",
+      "text": "実装担当",
+      "evidence": [
+        {
+          "path": "skills/react-component-quality/scripts/scaffold-component.mjs",
+          "symbol": "planComponentScaffold",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "quality-scaffold",
+      "type": "command",
+      "domain": "quality",
+      "text": "責務を分けたコンポーネントを生成する",
+      "evidence": [
+        {
+          "path": "skills/react-component-quality/scripts/scaffold-component.mjs",
+          "symbol": "planComponentScaffold",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "quality-scaffold-done",
+      "type": "event",
+      "domain": "quality",
+      "text": "コンポーネントの雛形を生成した",
+      "evidence": [
+        {
+          "path": "skills/react-component-quality/scripts/scaffold-component.mjs",
+          "symbol": "planComponentScaffold",
+          "role": "source"
+        }
+      ],
+      "phase": "implement"
+    },
+    {
+      "id": "quality-scaffold-rule",
+      "type": "aggregate",
+      "domain": "quality",
+      "text": "コンポーネント雛形",
+      "invariants": [
+        "生成先をプロジェクト内に限定し名前と既存ファイルを確認する"
+      ],
+      "evidence": [
+        {
+          "path": "skills/react-component-quality/scripts/scaffold-component.mjs",
+          "symbol": "planComponentScaffold",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "quality-transaction",
+      "type": "hotspot",
+      "domain": "quality",
+      "text": "品質基盤適用中の失敗とロールバック失敗は区別が必要。全CLIの再試行・プロセス強制終了後の復旧を共通状態機械としては定義していない。",
+      "attach": {
+        "to": "quality-apply",
+        "pos": "below"
+      },
+      "evidence": [
+        {
+          "path": "skills/react-component-quality/scripts/setup-react-quality.mjs",
+          "symbol": "rollbackTransaction",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "design-diff-actor",
+      "type": "actor",
+      "domain": "delivery",
+      "text": "UI確認担当",
+      "evidence": [
+        {
+          "path": "skills/design-diff/SKILL.md",
+          "symbol": "design",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "design-diff",
+      "type": "command",
+      "domain": "delivery",
+      "text": "参照画像と実装画面を比較する",
+      "evidence": [
+        {
+          "path": "skills/design-diff/SKILL.md",
+          "symbol": "design",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "design-diff-done",
+      "type": "event",
+      "domain": "delivery",
+      "text": "画面差分と修正候補を確認した",
+      "evidence": [
+        {
+          "path": "skills/design-diff/SKILL.md",
+          "symbol": "design",
+          "role": "source"
+        }
+      ],
+      "phase": "implement"
+    },
+    {
+      "id": "design-diff-view",
+      "type": "readModel",
+      "domain": "delivery",
+      "text": "画面比較の証拠",
+      "evidence": [
+        {
+          "path": "skills/design-diff/SKILL.md",
+          "symbol": "design",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "esm-tool",
+      "type": "external",
+      "domain": "model",
+      "text": "event-storming-mcp（公開ツール）",
+      "attach": {
+        "to": "model-render",
+        "pos": "above"
+      },
+      "note": "描画と検証のコードと会議サーバーの持ち主。スキルは npx で呼ぶ。",
+      "evidence": [
+        {
+          "path": "skills/scrum-domain-modeling/SKILL.md",
+          "symbol": "github:nowly-lab/mcp",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "meet-open-actor",
+      "type": "actor",
+      "domain": "meeting",
+      "text": "会議の進行役",
+      "evidence": [
+        {
+          "path": "skills/event-storming-mcp-tips/SKILL.md",
+          "symbol": "event-storming-mcp add",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "meet-open",
+      "type": "command",
+      "domain": "meeting",
+      "text": "モデルをサーバーで開く",
+      "evidence": [
+        {
+          "path": "skills/event-storming-mcp-tips/SKILL.md",
+          "symbol": "register_project",
+          "role": "entry"
+        }
+      ]
+    },
+    {
+      "id": "meet-open-rule",
+      "type": "aggregate",
+      "domain": "meeting",
+      "text": "登録プロジェクト",
+      "invariants": [
+        "リポジトリとモデルフォルダで1つ",
+        "書き込み先の作業場所は1つ"
+      ],
+      "evidence": [
+        {
+          "path": "skills/event-storming-mcp-tips/SKILL.md",
+          "symbol": "watched-repos.json",
+          "role": "persistence"
+        }
+      ]
+    },
+    {
+      "id": "meet-open-done",
+      "type": "event",
+      "domain": "meeting",
+      "text": "会議の画面に全体像を映した",
+      "evidence": [
+        {
+          "path": "skills/event-storming-mcp-tips/SKILL.md",
+          "symbol": "open_page",
+          "role": "ui"
+        }
+      ],
+      "phase": "plan"
+    },
+    {
+      "id": "meet-view",
+      "type": "readModel",
+      "domain": "meeting",
+      "text": "生きた全体像と変わった付箋",
+      "evidence": [
+        {
+          "path": "skills/event-storming-mcp-tips/SKILL.md",
+          "symbol": "open_page",
+          "role": "ui"
+        }
+      ]
+    },
+    {
+      "id": "meet-agent-actor",
+      "type": "actor",
+      "domain": "meeting",
+      "text": "会議のエージェント",
+      "evidence": [
+        {
+          "path": "skills/event-storming-mcp-tips/SKILL.md",
+          "symbol": "apply_changes",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "meet-agent",
+      "type": "command",
+      "domain": "meeting",
+      "text": "MCPでモデルを直す",
+      "evidence": [
+        {
+          "path": "skills/event-storming-mcp-tips/SKILL.md",
+          "symbol": "apply_changes",
+          "role": "entry"
+        }
+      ]
+    },
+    {
+      "id": "meet-agent-rule",
+      "type": "aggregate",
+      "domain": "meeting",
+      "text": "モデルの版",
+      "invariants": [
+        "古い版からの書き込みは断る",
+        "構造の誤りは保存しない",
+        "検証が全部通った版だけコミット用HTMLを書く"
+      ],
+      "evidence": [
+        {
+          "path": "skills/event-storming-mcp-tips/SKILL.md",
+          "symbol": "history.jsonl",
+          "role": "persistence"
+        }
+      ]
+    },
+    {
+      "id": "meet-agent-done",
+      "type": "event",
+      "domain": "meeting",
+      "text": "エージェントの変更を記録した",
+      "evidence": [
+        {
+          "path": "skills/event-storming-mcp-tips/SKILL.md",
+          "symbol": "apply_changes",
+          "role": "source"
+        }
+      ],
+      "phase": "plan"
+    },
+    {
+      "id": "meet-human-actor",
+      "type": "actor",
+      "domain": "meeting",
+      "text": "会議の参加者",
+      "evidence": [
+        {
+          "path": "skills/event-storming-mcp-tips/SKILL.md",
+          "symbol": "図の上で直す",
+          "role": "ui"
+        }
+      ]
+    },
+    {
+      "id": "meet-human",
+      "type": "command",
+      "domain": "meeting",
+      "text": "図の上で付箋と矢印を直す",
+      "evidence": [
+        {
+          "path": "skills/event-storming-mcp-tips/SKILL.md",
+          "symbol": "図の上で直す",
+          "role": "ui"
+        }
+      ]
+    },
+    {
+      "id": "meet-human-rule",
+      "type": "aggregate",
+      "domain": "meeting",
+      "text": "モデルの版",
+      "invariants": [
+        "古い版からの書き込みは断る",
+        "付箋を消すと参照も消し、消す前に一覧で確かめる"
+      ],
+      "evidence": [
+        {
+          "path": "skills/event-storming-mcp-tips/SKILL.md",
+          "symbol": "history.jsonl",
+          "role": "persistence"
+        }
+      ]
+    },
+    {
+      "id": "meet-human-done",
+      "type": "event",
+      "domain": "meeting",
+      "text": "人の手直しを記録した",
+      "evidence": [
+        {
+          "path": "skills/event-storming-mcp-tips/SKILL.md",
+          "symbol": "図の上で直す",
+          "role": "ui"
+        }
+      ],
+      "phase": "plan"
+    },
+    {
+      "id": "meet-history",
+      "type": "readModel",
+      "domain": "meeting",
+      "text": "変更履歴と前後の図",
+      "evidence": [
+        {
+          "path": "skills/event-storming-mcp-tips/SKILL.md",
+          "symbol": "list_history",
+          "role": "ui"
+        }
+      ]
+    },
+    {
+      "id": "meet-restore-actor",
+      "type": "actor",
+      "domain": "meeting",
+      "text": "会議の進行役",
+      "evidence": [
+        {
+          "path": "skills/event-storming-mcp-tips/SKILL.md",
+          "symbol": "restore_version",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "meet-restore",
+      "type": "command",
+      "domain": "meeting",
+      "text": "前の版に戻す",
+      "evidence": [
+        {
+          "path": "skills/event-storming-mcp-tips/SKILL.md",
+          "symbol": "restore_version",
+          "role": "entry"
+        }
+      ]
+    },
+    {
+      "id": "meet-restore-rule",
+      "type": "aggregate",
+      "domain": "meeting",
+      "text": "モデルの版",
+      "invariants": [
+        "戻すことも新しい版として記録する"
+      ],
+      "evidence": [
+        {
+          "path": "skills/event-storming-mcp-tips/SKILL.md",
+          "symbol": "history.jsonl",
+          "role": "persistence"
+        }
+      ]
+    },
+    {
+      "id": "meet-restore-done",
+      "type": "event",
+      "domain": "meeting",
+      "text": "版を戻した",
+      "evidence": [
+        {
+          "path": "skills/event-storming-mcp-tips/SKILL.md",
+          "symbol": "restore_version",
+          "role": "source"
+        }
+      ],
+      "phase": "plan"
+    },
+    {
+      "id": "meet-transcript",
+      "type": "hotspot",
+      "domain": "meeting",
+      "text": "会議の会話をエージェントに届ける仕組みは別の MCP（文字起こし）で作る。この計画では扱わない。",
+      "attach": {
+        "to": "meet-agent",
+        "pos": "below"
+      },
+      "evidence": [
+        {
+          "path": "skills/event-storming-mcp-tips/SKILL.md",
+          "symbol": "文字起こし",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "meet-draft",
+      "type": "hotspot",
+      "domain": "meeting",
+      "text": "決まりに違反した書きかけの版は保存して図に赤く示すが、コミット用HTMLは検証が通るまで書かない。会議の後に直し切る手順は未定。",
+      "attach": {
+        "to": "meet-human",
+        "pos": "below"
+      },
+      "evidence": [
+        {
+          "path": "skills/event-storming-mcp-tips/SKILL.md",
+          "symbol": "書きかけ",
+          "role": "source"
+        }
+      ]
+    },
+    {
+      "id": "timeline-repeated-work",
+      "type": "hotspot",
+      "domain": "release",
+      "text": "会議での編集・main 同期は、案件のどの時点で行うかを一意に定めていない。列は各手順の役割を表し、全案件共通の実行順や一度限りの実行を定めない。",
+      "attach": {
+        "to": "pull-main",
+        "pos": "below"
+      }
+    },
+    {
+      "id": "project-side",
+      "type": "external",
+      "domain": "delivery",
+      "text": "プロジェクトの tips・秘密情報の運用（各プロジェクト側）",
+      "attach": {
+        "to": "plan-actor",
+        "pos": "above"
+      },
+      "note": "製品ごとの構造・コマンド・公開先・秘密情報は、このリポジトリではなく各プロジェクトの AGENTS.md / CLAUDE.md や非公開の <product>-tips スキルにある。計画・実装・公開はそれを読む。",
+      "changed": true,
+      "evidence": [
+        {
+          "path": "README.md",
+          "symbol": "Product-specific knowledge",
+          "role": "source"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": "plan-actor",
+      "to": "plan",
+      "kind": "flow"
+    },
+    {
+      "from": "plan",
+      "to": "plan-rule",
+      "kind": "flow"
+    },
+    {
+      "from": "plan-rule",
+      "to": "plan-done",
+      "kind": "flow"
+    },
+    {
+      "from": "plan-done",
+      "to": "plan-view",
+      "kind": "result"
+    },
+    {
+      "from": "implement-actor",
+      "to": "implement",
+      "kind": "flow"
+    },
+    {
+      "from": "implement",
+      "to": "implement-rule",
+      "kind": "flow"
+    },
+    {
+      "from": "implement-rule",
+      "to": "implement-done",
+      "kind": "flow"
+    },
+    {
+      "from": "implement-done",
+      "to": "implement-view",
+      "kind": "result"
+    },
+    {
+      "from": "review-actor",
+      "to": "review",
+      "kind": "flow"
+    },
+    {
+      "from": "review",
+      "to": "review-rule",
+      "kind": "flow"
+    },
+    {
+      "from": "review-rule",
+      "to": "review-done",
+      "kind": "flow"
+    },
+    {
+      "from": "review-done",
+      "to": "review-view",
+      "kind": "result"
+    },
+    {
+      "from": "plan-done",
+      "to": "plan-handoff",
+      "kind": "flow"
+    },
+    {
+      "from": "plan-handoff",
+      "to": "implement",
+      "kind": "flow"
+    },
+    {
+      "from": "implement-done",
+      "to": "review-handoff",
+      "kind": "flow"
+    },
+    {
+      "from": "review-handoff",
+      "to": "review",
+      "kind": "flow"
+    },
+    {
+      "from": "model-init-actor",
+      "to": "model-init",
+      "kind": "flow"
+    },
+    {
+      "from": "model-init",
+      "to": "model-init-rule",
+      "kind": "flow"
+    },
+    {
+      "from": "model-init-rule",
+      "to": "model-init-done",
+      "kind": "flow"
+    },
+    {
+      "from": "model-render-actor",
+      "to": "model-render",
+      "kind": "flow"
+    },
+    {
+      "from": "model-render",
+      "to": "model-render-rule",
+      "kind": "flow"
+    },
+    {
+      "from": "model-render-rule",
+      "to": "model-render-done",
+      "kind": "flow"
+    },
+    {
+      "from": "model-render-done",
+      "to": "model-render-view",
+      "kind": "result"
+    },
+    {
+      "from": "model-check-actor",
+      "to": "model-check",
+      "kind": "flow"
+    },
+    {
+      "from": "model-check",
+      "to": "model-check-rule",
+      "kind": "flow"
+    },
+    {
+      "from": "model-check-rule",
+      "to": "model-check-done",
+      "kind": "flow"
+    },
+    {
+      "from": "model-check-done",
+      "to": "model-check-view",
+      "kind": "result"
+    },
+    {
+      "from": "dmmf-actor",
+      "to": "dmmf",
+      "kind": "flow"
+    },
+    {
+      "from": "dmmf",
+      "to": "dmmf-done",
+      "kind": "flow"
+    },
+    {
+      "from": "dmmf-done",
+      "to": "dmmf-view",
+      "kind": "result"
+    },
+    {
+      "from": "model-init-done",
+      "to": "model-render",
+      "kind": "flow"
+    },
+    {
+      "from": "model-render-done",
+      "to": "model-check",
+      "kind": "flow"
+    },
+    {
+      "from": "plan-done",
+      "to": "model-render",
+      "kind": "flow"
+    },
+    {
+      "from": "model-check-done",
+      "to": "dmmf",
+      "kind": "flow"
+    },
+    {
+      "from": "release-actor",
+      "to": "release",
+      "kind": "flow"
+    },
+    {
+      "from": "release",
+      "to": "release-rule",
+      "kind": "flow"
+    },
+    {
+      "from": "release-rule",
+      "to": "release-done",
+      "kind": "flow"
+    },
+    {
+      "from": "review-done",
+      "to": "release-handoff",
+      "kind": "flow"
+    },
+    {
+      "from": "release-handoff",
+      "to": "release",
+      "kind": "flow"
+    },
+    {
+      "from": "pull-main-actor",
+      "to": "pull-main",
+      "kind": "flow"
+    },
+    {
+      "from": "pull-main",
+      "to": "pull-main-rule",
+      "kind": "flow"
+    },
+    {
+      "from": "pull-main-rule",
+      "to": "pull-main-done",
+      "kind": "flow"
+    },
+    {
+      "from": "push-main-actor",
+      "to": "push-main",
+      "kind": "flow"
+    },
+    {
+      "from": "push-main",
+      "to": "push-main-rule",
+      "kind": "flow"
+    },
+    {
+      "from": "push-main-rule",
+      "to": "push-main-done",
+      "kind": "flow"
+    },
+    {
+      "from": "quality-plan-actor",
+      "to": "quality-plan",
+      "kind": "flow"
+    },
+    {
+      "from": "quality-plan",
+      "to": "quality-plan-done",
+      "kind": "flow"
+    },
+    {
+      "from": "quality-plan-done",
+      "to": "quality-plan-view",
+      "kind": "result"
+    },
+    {
+      "from": "quality-apply-actor",
+      "to": "quality-apply",
+      "kind": "flow"
+    },
+    {
+      "from": "quality-apply",
+      "to": "quality-apply-rule",
+      "kind": "flow"
+    },
+    {
+      "from": "quality-apply-rule",
+      "to": "quality-apply-done",
+      "kind": "flow"
+    },
+    {
+      "from": "quality-audit-actor",
+      "to": "quality-audit",
+      "kind": "flow"
+    },
+    {
+      "from": "quality-audit",
+      "to": "quality-audit-done",
+      "kind": "flow"
+    },
+    {
+      "from": "quality-audit-done",
+      "to": "quality-audit-view",
+      "kind": "result"
+    },
+    {
+      "from": "quality-scaffold-actor",
+      "to": "quality-scaffold",
+      "kind": "flow"
+    },
+    {
+      "from": "quality-scaffold",
+      "to": "quality-scaffold-rule",
+      "kind": "flow"
+    },
+    {
+      "from": "quality-scaffold-rule",
+      "to": "quality-scaffold-done",
+      "kind": "flow"
+    },
+    {
+      "from": "quality-plan-done",
+      "to": "quality-apply",
+      "kind": "flow"
+    },
+    {
+      "from": "design-diff-actor",
+      "to": "design-diff",
+      "kind": "flow"
+    },
+    {
+      "from": "design-diff",
+      "to": "design-diff-done",
+      "kind": "flow"
+    },
+    {
+      "from": "design-diff-done",
+      "to": "design-diff-view",
+      "kind": "result"
+    },
+    {
+      "from": "plan-view",
+      "to": "implement-actor",
+      "kind": "flow"
+    },
+    {
+      "from": "implement-view",
+      "to": "review-actor",
+      "kind": "flow"
+    },
+    {
+      "from": "review-view",
+      "to": "release-actor",
+      "kind": "flow"
+    },
+    {
+      "from": "model-render-view",
+      "to": "dmmf-actor",
+      "kind": "flow"
+    },
+    {
+      "from": "model-check-view",
+      "to": "implement-actor",
+      "kind": "flow"
+    },
+    {
+      "from": "dmmf-view",
+      "to": "implement-actor",
+      "kind": "flow"
+    },
+    {
+      "from": "quality-plan-view",
+      "to": "quality-apply-actor",
+      "kind": "flow"
+    },
+    {
+      "from": "quality-audit-view",
+      "to": "quality-scaffold-actor",
+      "kind": "flow"
+    },
+    {
+      "from": "design-diff-view",
+      "to": "implement-actor",
+      "kind": "flow"
+    },
+    {
+      "from": "meet-open-actor",
+      "to": "meet-open",
+      "kind": "flow"
+    },
+    {
+      "from": "meet-open",
+      "to": "meet-open-rule",
+      "kind": "flow"
+    },
+    {
+      "from": "meet-open-rule",
+      "to": "meet-open-done",
+      "kind": "flow"
+    },
+    {
+      "from": "meet-agent-actor",
+      "to": "meet-agent",
+      "kind": "flow"
+    },
+    {
+      "from": "meet-agent",
+      "to": "meet-agent-rule",
+      "kind": "flow"
+    },
+    {
+      "from": "meet-agent-rule",
+      "to": "meet-agent-done",
+      "kind": "flow"
+    },
+    {
+      "from": "meet-view",
+      "to": "meet-human-actor",
+      "kind": "flow"
+    },
+    {
+      "from": "meet-human-actor",
+      "to": "meet-human",
+      "kind": "flow"
+    },
+    {
+      "from": "meet-human",
+      "to": "meet-human-rule",
+      "kind": "flow"
+    },
+    {
+      "from": "meet-human-rule",
+      "to": "meet-human-done",
+      "kind": "flow"
+    },
+    {
+      "from": "meet-history",
+      "to": "meet-restore-actor",
+      "kind": "flow"
+    },
+    {
+      "from": "meet-restore-actor",
+      "to": "meet-restore",
+      "kind": "flow"
+    },
+    {
+      "from": "meet-restore",
+      "to": "meet-restore-rule",
+      "kind": "flow"
+    },
+    {
+      "from": "meet-restore-rule",
+      "to": "meet-restore-done",
+      "kind": "flow"
+    },
+    {
+      "from": "meet-open-done",
+      "to": "meet-view",
+      "kind": "result"
+    },
+    {
+      "from": "meet-agent-done",
+      "to": "meet-view",
+      "kind": "result"
+    },
+    {
+      "from": "meet-human-done",
+      "to": "meet-view",
+      "kind": "result"
+    },
+    {
+      "from": "meet-restore-done",
+      "to": "meet-view",
+      "kind": "result"
+    },
+    {
+      "from": "meet-agent-done",
+      "to": "meet-history",
+      "kind": "result"
+    },
+    {
+      "from": "meet-human-done",
+      "to": "meet-history",
+      "kind": "result"
+    }
+  ],
+  "phases": [
+    {
+      "id": "prepare",
+      "name": "依頼と作業環境を確認する",
+      "note": "依頼の受付、製品の制約と必要な環境の確認。"
+    },
+    {
+      "id": "plan",
+      "name": "計画を整える",
+      "note": "会議でモデルを直し、計画と導入差分を整える。"
+    },
+    {
+      "id": "design",
+      "name": "モデルを確かめて設計する",
+      "note": "描画・照合を経て実装用の設計へ具体化する。"
+    },
+    {
+      "id": "implement",
+      "name": "実装して検証する",
+      "note": "実装と必要な補助処理を行い、検証結果を記録する。"
+    },
+    {
+      "id": "review",
+      "name": "成果と教訓を確認する",
+      "note": "レビュー判定と、検証済みUI修正から得た教訓の採否を確認する。"
+    },
+    {
+      "id": "handoff",
+      "name": "公開・次の作業へ引き継ぐ",
+      "note": "公開結果とリポジトリ同期を確認し、採択した教訓を次のセッションへ渡す。"
+    }
+  ]
+}
