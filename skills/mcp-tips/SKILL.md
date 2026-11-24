@@ -1,6 +1,6 @@
 ---
 name: mcp-tips
-description: Tips for nowly-lab/mcp, the repository that holds every nowly-lab MCP server as its own package (event-storming-mcp, meeting-voice-mcp, why-why-talk, diagram-mcp, metric-tree-mcp, marketing-mcp, knowledge-mcp, speak-mcp): layout, how npx runs a package from GitHub, dependency rules, commands, release and constraints. Use when working on any of those packages or adding a new MCP.
+description: "Tips for nowly-lab/mcp, the repository that holds every nowly-lab MCP server as its own package (event-storming-mcp, meeting-voice-mcp, why-why-talk, diagram-mcp, metric-tree-mcp, marketing-mcp, knowledge-mcp, speak-mcp): layout, how npx runs a package from GitHub, dependency rules, commands, release and constraints. Use when working on any of those packages or adding a new MCP."
 ---
 
 # nowly-lab/mcp tips

@@ -1,6 +1,6 @@
 ---
 name: event-storming-mcp-tips
-description: Tips for event-storming-mcp (packages/event-storming-mcp in nowly-lab/mcp, formerly nowly-lab/event-storming-mcp), the tool that validates and renders scrum-domain-modeling models (init/validate/render/check) and runs the live board for meetings (one local server, an MCP server agents edit through, inline editing and history): structure, commands, MCP setup, release and constraints.
+description: "Tips for event-storming-mcp (packages/event-storming-mcp in nowly-lab/mcp, formerly nowly-lab/event-storming-mcp), the tool that validates and renders scrum-domain-modeling models (init/validate/render/check) and runs the live board for meetings (one local server, an MCP server agents edit through, inline editing and history): structure, commands, MCP setup, release and constraints."
 ---
 
 # event-storming-mcp tips

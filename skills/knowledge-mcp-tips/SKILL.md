@@ -1,6 +1,6 @@
 ---
 name: knowledge-mcp-tips
-description: Tips for knowledge-mcp (packages/knowledge-mcp in nowly-lab/mcp), the MCP server that keeps one person's decisions, current views (今こう思っている), knowledge and why-why side branches with sources in a local data folder, and brings them back with spaced-repetition reviews: structure, commands, data folder, how why-why-talk and meetings feed it, release and constraints. Use when working on it, or when recording what the person decided or asking what they think now.
+description: "Tips for knowledge-mcp (packages/knowledge-mcp in nowly-lab/mcp), the MCP server that keeps one person's decisions, current views (今こう思っている), knowledge and why-why side branches with sources in a local data folder, and brings them back with spaced-repetition reviews: structure, commands, data folder, how why-why-talk and meetings feed it, release and constraints. Use when working on it, or when recording what the person decided or asking what they think now."
 ---
 
 # knowledge-mcp tips
