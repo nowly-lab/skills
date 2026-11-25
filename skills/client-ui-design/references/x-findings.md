@@ -668,3 +668,28 @@ enoyann: 1921707391152009489, 1922598261485174853 / Frontend_Prince: 20857067336
 - 改正障害者差別解消法（2024年4月）で民間にも合理的配慮が義務化。ECはスマホ片手でカートまで行けるか（[@kubokeiju](https://x.com/kubokeiju/status/2124833692199928156)）→ 既存のアクセシビリティ行・375px確認
 
 - 不採用：AIスロップ除去スキル・素材のまとめ（@nakalab777、@protoduct_ai、@Dionisselamii、@tetumemo、@uiuxpass など、宣伝・まとめ）、AIデザインセミナーの告知（@amity_sensei）、BtoB診断ツール（@miyawakidai、宣伝）、AI音声ヒアリングで転換率20%改善（@XnwvN、海外事例の紹介・自己申告）、X本体の新UIへの感想、ゲーム「ペルソナ」・各種申込フォームの告知など無関係な投稿
+
+
+## 2026-11-25 追加（定期見直し。2026-11-24 09:00〜11-25 09:00 JSTの投稿）
+
+**AIっぽさ**
+- AIにWebページを作らせると、題材が違っても「左に大きな見出し・右に画像・その下に丸いバッジとカードの列」になる。Google DeepMindのPhilipp Schmid氏がGemini 4 Neon向けのデザインの作法を公開した、という紹介（[@FumiShingai](https://x.com/FumiShingai/status/2125332013481898245)、[@GEN_TECHCAMP](https://x.com/GEN_TECHCAMP/status/2125371924079669459)。元資料は未確認）→ 既存のAIっぽさ表（バッジ・カード）。元資料を読めたら内容を確かめる
+- 避ける型をAIに調べさせて避けさせ、デザインのスキルにも従わせると結果がよくなる。既定値がvibe codedに見せている（[@builtbystef](https://x.com/builtbystef/status/2125020595498656163)、[@RoburnaBuilders](https://x.com/RoburnaBuilders/status/2125024683296788628)）→ 既存の冒頭の考え方・Step 5
+
+**情報設計**
+- 情報量の多いページは文章を削る前に「全員に常に見せる情報」と「必要な人だけが開いて読む情報」に分ける（[@mekaru2023](https://x.com/mekaru2023/status/2125356303132586311)）→ 1件のため見送り
+- BtoBでチャットをLPの主役にする例が増えているが、チャットは情報設計の代わりにならず隠すだけ。多くの人は打つ言葉を当てるより見て回りたい（[@richiewxyz](https://x.com/richiewxyz/status/2125310976421487052)）→ 1件のため見送り
+
+**LP/CVR・EFO**
+- 問い合わせフォームの項目は①返信に必要か②対応の判断に必要か③あとから聞けるか、で見直す（[@smallbizlab0314](https://x.com/smallbizlab0314/status/2125097485702189131)、自分のnoteの宣伝を含む）
+- 住所も役職も最初の問い合わせでは要らない。名前・連絡先・内容の3つから始める。SNSから来た人は面倒と思った瞬間に閉じる（[@tunerofeveryone](https://x.com/tunerofeveryone/status/2125099639611298039)）
+- 買うのをやめた客は理由を言わない。項目の多さを見て閉じる（[@na__poleon](https://x.com/na__poleon/status/2125099472510128254)）
+  → 上の3件をStep 7のフォーム行に反映
+- 問い合わせが少なくてもサイトを作り直す必要はない。説明を分かりやすく、事例を追加、フォームを改善、疑問に答える記事（[@irick_web](https://x.com/irick_web/status/2125137298044186993)、制作会社）→ 11-24に追加したリニューアルの行の裏付け
+- LPで離脱される理由は、何のサービスか分からない・自分に関係あると思えない・申し込む理由が弱い。FVで全部答えているか（[@shabu_ad](https://x.com/shabu_ad/status/2125023592815493432)）／デザインを触る前に広告の見出しとFVの言葉をそろえる（[@marketingbiz_jp](https://x.com/marketingbiz_jp/status/2125061849913667982)）→ 既存のFVテスト・メッセージマッチ
+
+**アクセシビリティ**
+- モーダルをEnterで開いてEscで閉じ、フォーカスが元のボタンに戻るかをリリース前に確かめる（[@jul1anodev](https://x.com/jul1anodev/status/2125320415757381785)）→ 1件のため見送り（既存の「キーボードで閉じられないモーダル」の延長）
+- 明るい画面ですべての入力欄の枠が見えるか確かめる（[@nickshiftlives](https://x.com/nickshiftlives/status/2125168005344604170)）→ 既存のコントラスト行（入力欄の枠）
+
+- 不採用：AIっぽさ除去ツール・無料プレゼント・LP監査ツールの宣伝（@4on_yon_x、@ClaudeCode_aca、@ardent__dev、@itsTeko0 など）、LP制作会社の作り直し保証のニュース、ゲーム「ペルソナ」・LP投資（ファンド）・LPガスなど無関係な投稿
